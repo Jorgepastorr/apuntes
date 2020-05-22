@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "title": "Schema title",
+  "description": "Schema description",
+  "type": "object",
+  "properties": {
+    "year": {
+      "type": "number"
+    },
+    "type": {
+      "type": "string"
+    },
+    "person": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "movie": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

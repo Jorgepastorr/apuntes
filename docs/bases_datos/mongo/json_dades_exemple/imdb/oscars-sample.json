@@ -1,0 +1,12 @@
+{
+  "year": 2013,
+  "type": "BEST-ACTOR",
+  "person": {
+    "id": "0000358",
+    "name": "Daniel Day-Lewis"
+  },
+  "movie": {
+    "id": "0443272",
+    "name": "Lincoln"
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "title": "Schema title",
+  "description": "Schema description",
+  "type": "object",
+  "properties": {
+    "address": {
+      "type": "object",
+      "properties": {
+        "building": {
+          "type": "string"
+        },
+        "coord": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "street": {
+          "type": "string"
+        },
+        "zipcode": {
+          "type": "string"
+        }
+      }
+    },
+    "borough": {
+      "type": "string"
+    },
+    "cuisine": {
+      "type": "string"
+    },
+    "grades": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "date": {
+              "type": "object",
+              "properties": {
+                "$date": {
+                  "type": "number"
+                }
+              }
+            },
+            "grade": {
+              "type": "string"
+            },
+            "score": {
+              "type": "number"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "date": {
+              "type": "object",
+              "properties": {
+                "$date": {
+                  "type": "number"
+                }
+              }
+            },
+            "grade": {
+              "type": "string"
+            },
+            "score": {
+              "type": "number"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "date": {
+              "type": "object",
+              "properties": {
+                "$date": {
+                  "type": "number"
+                }
+              }
+            },
+            "grade": {
+              "type": "string"
+            },
+            "score": {
+              "type": "number"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "date": {
+              "type": "object",
+              "properties": {
+                "$date": {
+                  "type": "number"
+                }
+              }
+            },
+            "grade": {
+              "type": "string"
+            },
+            "score": {
+              "type": "number"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "date": {
+              "type": "object",
+              "properties": {
+                "$date": {
+                  "type": "number"
+                }
+              }
+            },
+            "grade": {
+              "type": "string"
+            },
+            "score": {
+              "type": "number"
+            }
+          }
+        }
+      ]
+    },
+    "name": {
+      "type": "string"
+    },
+    "restaurant_id": {
+      "type": "string"
+    }
+  }
+}

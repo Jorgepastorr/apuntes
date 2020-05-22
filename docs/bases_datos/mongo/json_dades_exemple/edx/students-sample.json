@@ -1,0 +1,12 @@
+{
+  "_id": {
+    "$oid": "57694ec7dabba852cb0ca3f1"
+  },
+  "name": "Joan Ignasi",
+  "lastname1": "Zumarán",
+  "lastname2": "Astilleros",
+  "gender": "H",
+  "email": "litke@talktalk.net",
+  "phone": "699.225.929",
+  "birth_year": 1976
+}

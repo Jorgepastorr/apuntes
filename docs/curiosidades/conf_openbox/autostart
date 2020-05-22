@@ -1,0 +1,10 @@
+# permitir fondo de escritorio
+nitrogen --restore&
+# panel 
+tint2&
+# permitir transparencia y una pequña animación de abrir/cerrar ventana
+xcompmgr -cCfF -t-3 -l-5 -r5 -D4&
+# lanzador de aplicaciones molon
+ulauncher&
+# bloqueador de pantalla
+xscreensaver&

@@ -1,0 +1,37 @@
+{
+  "_id": {
+    "$oid": "4ba267dc238d3ba3ca000001"
+  },
+  "href": "http://digg.com/people/Jedi_believer_who_refused_to_remove_hood_gets_an_apology",
+  "title": "'Jedi' believer who refused to remove hood gets an apology!",
+  "comments": 153,
+  "container": {
+    "name": "Offbeat",
+    "short_name": "offbeat"
+  },
+  "submit_date": 1268771801,
+  "topic": {
+    "name": "People",
+    "short_name": "people"
+  },
+  "promote_date": 1268915964,
+  "id": "19970068",
+  "media": "news",
+  "diggs": 404,
+  "description": "Chris Jarvis is a member of the International Church of Jediism - based on the famous Star Wars films - whose doctrine states followers can wear hoods.",
+  "link": "http://www.dailymail.co.uk/news/article-1258365/Jedi-believer-wins-apology-Jobcentre-kicked-wearing-hood.html",
+  "user": {
+    "name": "babychen",
+    "registered": 1141570067,
+    "fullname": "Babychen Mathew",
+    "icon": "http://digg.com/users/babychen/l.png",
+    "profileviews": 24749
+  },
+  "status": "popular",
+  "shorturl": [
+    {
+      "short_url": "http://digg.com/d31Ln7s",
+      "view_count": 3682
+    }
+  ]
+}

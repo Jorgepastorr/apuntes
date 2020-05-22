@@ -1,0 +1,95 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "title": "Schema title",
+  "description": "Schema description",
+  "type": "object",
+  "properties": {
+    "_id": {
+      "type": "number"
+    },
+    "name": {
+      "type": "object",
+      "properties": {
+        "first": {
+          "type": "string"
+        },
+        "last": {
+          "type": "string"
+        }
+      }
+    },
+    "birthYear": {
+      "type": "number"
+    },
+    "deathYear": {
+      "type": "number"
+    },
+    "contribs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "awards": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "award": {
+              "type": "string"
+            },
+            "year": {
+              "type": "number"
+            },
+            "by": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "award": {
+              "type": "string"
+            },
+            "year": {
+              "type": "number"
+            },
+            "by": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "award": {
+              "type": "string"
+            },
+            "year": {
+              "type": "number"
+            },
+            "by": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "award": {
+              "type": "string"
+            },
+            "year": {
+              "type": "number"
+            },
+            "by": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

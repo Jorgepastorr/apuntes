@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "title": "Schema title",
+  "description": "Schema description",
+  "type": "object",
+  "properties": {
+    "_id": {
+      "type": "object",
+      "properties": {
+        "$oid": {
+          "type": "string"
+        }
+      }
+    },
+    "name": {
+      "type": "string"
+    },
+    "lastname1": {
+      "type": "string"
+    },
+    "lastname2": {
+      "type": "string"
+    },
+    "gender": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "birth_year": {
+      "type": "number"
+    }
+  }
+}

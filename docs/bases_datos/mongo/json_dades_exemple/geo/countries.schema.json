@@ -1,0 +1,142 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "title": "Schema title",
+  "description": "Schema description",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "object",
+      "properties": {
+        "common": {
+          "type": "string"
+        },
+        "official": {
+          "type": "string"
+        },
+        "native": {
+          "type": "object",
+          "properties": {
+            "common": {
+              "type": "string"
+            },
+            "official": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "tld": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "cca2": {
+      "type": "string"
+    },
+    "ccn3": {
+      "type": "string"
+    },
+    "cca3": {
+      "type": "string"
+    },
+    "currency": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "callingCode": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "capital": {
+      "type": "string"
+    },
+    "altSpellings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "relevance": {
+      "type": "string"
+    },
+    "region": {
+      "type": "string"
+    },
+    "subregion": {
+      "type": "string"
+    },
+    "nativeLanguage": {
+      "type": "string"
+    },
+    "languages": {
+      "type": "object",
+      "properties": {
+        "prs": {
+          "type": "string"
+        },
+        "pus": {
+          "type": "string"
+        },
+        "tuk": {
+          "type": "string"
+        }
+      }
+    },
+    "translations": {
+      "type": "object",
+      "properties": {
+        "cym": {
+          "type": "string"
+        },
+        "deu": {
+          "type": "string"
+        },
+        "fra": {
+          "type": "string"
+        },
+        "hrv": {
+          "type": "string"
+        },
+        "ita": {
+          "type": "string"
+        },
+        "jpn": {
+          "type": "string"
+        },
+        "nld": {
+          "type": "string"
+        },
+        "rus": {
+          "type": "string"
+        },
+        "spa": {
+          "type": "string"
+        }
+      }
+    },
+    "latlng": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "demonym": {
+      "type": "string"
+    },
+    "borders": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "area": {
+      "type": "number"
+    }
+  }
+}

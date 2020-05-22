@@ -1,0 +1,168 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "title": "Schema title",
+  "description": "Schema description",
+  "type": "object",
+  "properties": {
+    "text": {
+      "type": "string"
+    },
+    "in_reply_to_status_id": {
+      "type": "null"
+    },
+    "retweet_count": {
+      "type": "null"
+    },
+    "contributors": {
+      "type": "null"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "geo": {
+      "type": "null"
+    },
+    "source": {
+      "type": "string"
+    },
+    "coordinates": {
+      "type": "null"
+    },
+    "in_reply_to_screen_name": {
+      "type": "null"
+    },
+    "truncated": {
+      "type": "boolean"
+    },
+    "entities": {
+      "type": "object",
+      "properties": {
+        "user_mentions": {
+          "type": "array"
+        },
+        "urls": {
+          "type": "array"
+        },
+        "hashtags": {
+          "type": "array"
+        }
+      }
+    },
+    "retweeted": {
+      "type": "boolean"
+    },
+    "place": {
+      "type": "null"
+    },
+    "user": {
+      "type": "object",
+      "properties": {
+        "friends_count": {
+          "type": "number"
+        },
+        "profile_sidebar_fill_color": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "verified": {
+          "type": "boolean"
+        },
+        "follow_request_sent": {
+          "type": "null"
+        },
+        "favourites_count": {
+          "type": "number"
+        },
+        "profile_sidebar_border_color": {
+          "type": "string"
+        },
+        "profile_image_url": {
+          "type": "string"
+        },
+        "geo_enabled": {
+          "type": "boolean"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "time_zone": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "screen_name": {
+          "type": "string"
+        },
+        "notifications": {
+          "type": "null"
+        },
+        "profile_background_color": {
+          "type": "string"
+        },
+        "listed_count": {
+          "type": "number"
+        },
+        "lang": {
+          "type": "string"
+        },
+        "profile_background_image_url": {
+          "type": "string"
+        },
+        "statuses_count": {
+          "type": "number"
+        },
+        "following": {
+          "type": "null"
+        },
+        "profile_text_color": {
+          "type": "string"
+        },
+        "protected": {
+          "type": "boolean"
+        },
+        "show_all_inline_media": {
+          "type": "boolean"
+        },
+        "profile_background_tile": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "contributors_enabled": {
+          "type": "boolean"
+        },
+        "profile_link_color": {
+          "type": "string"
+        },
+        "followers_count": {
+          "type": "number"
+        },
+        "id": {
+          "type": "number"
+        },
+        "profile_use_background_image": {
+          "type": "boolean"
+        },
+        "utc_offset": {
+          "type": "number"
+        }
+      }
+    },
+    "favorited": {
+      "type": "boolean"
+    },
+    "in_reply_to_user_id": {
+      "type": "null"
+    },
+    "id": {
+      "type": "number"
+    }
+  }
+}

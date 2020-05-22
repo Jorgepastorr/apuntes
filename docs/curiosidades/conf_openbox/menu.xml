@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openbox_menu xmlns="http://openbox.org/3.4/menu">
+	<menu execute="/usr/libexec/openbox-xdg-menu applications" id="applications-menu" label="Applications"/>
+	<menu execute="/usr/libexec/openbox-xdg-menu preferences" id="preferences-menu" label="Preferences"/>
+	<menu execute="/usr/libexec/openbox-xdg-menu system-settings" id="administration-menu" label="Administration"/>
+	<menu execute="/usr/libexec/openbox-xdg-menu /etc/xdg/openbox/terminals" id="terminals-menu" label="Terminals"/>
+	<menu id="root-menu" label="Openbox 3">
+		<separator label="Openbox"/>
+		<menu id="applications-menu"/>
+		<menu id="administration-menu"/>
+		<separator/>
+		<menu id="terminals-menu"/>
+		<separator/>
+		<menu id="root-menu-685429" label="Configuraciones">
+			<item label="Conexiones de red" icon="/usr/share/icons/Paper/24x24/categories/preferences-system-network.png">
+				<action name="Execute">
+					<execute>nm-connection-editor</execute>
+				</action>
+			</item>
+			<item label="Configuración panel" icon="/usr/share/icons/Paper/24x24/apps/tint2conf.png">
+				<action name="Execute">
+					<execute>tint2conf</execute>
+				</action>
+			</item>
+			<item label="Configuración atajos de teclado"  icon="/usr/share/icons/menu-tint-custom/keyboard-512.png"> 
+				<action name="Execute">
+					<execute>/opt/obkey/obkey</execute>
+				</action>
+			</item>
+			<item label="Configuración monitores"  icon="/usr/share/icons/menu-tint-custom/monitor.png">
+				<action name="Execute">
+					<execute>lxrandr</execute>
+				</action>
+			</item>
+			<item label="configuración tema"  icon="/usr/share/icons/menu-tint-custom/preferences-desktop-theme.png">
+				<action name="Execute">
+					<execute>lxappearance</execute>
+				</action>
+			</item>
+			<item label="Configuración openbox" icon="/usr/share/pixmaps/obconf.png">
+				<action name="Execute">
+					<execute>obconf</execute>
+				</action>
+			</item>
+			<item label="Fondo de pantalla" icon="/usr/share/icons/hicolor/22x22/apps/nitrogen.png">
+				<action name="Execute">
+					<execute>nitrogen</execute>
+				</action>
+			</item>
+			<item label="Configuración menu" icon="/usr/share/icons/menu-tint-custom/obmenu.png">
+				<action name="Execute">
+					<execute>obmenu</execute>
+				</action>
+			</item>
+		</menu>
+		<item label="Reconfigure">
+			<action name="Reconfigure"/>
+		</item>
+		<item label="Exit">
+			<action name="Exit">
+				<prompt>yes</prompt>
+			</action>
+		</item>
+		<separator/>
+		<item label="Log Out">
+			<action name="SessionLogout">
+				<prompt>yes</prompt>
+			</action>
+		</item>
+	</menu>
+</openbox_menu>

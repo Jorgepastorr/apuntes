@@ -1,0 +1,105 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "title": "Schema title",
+  "description": "Schema description",
+  "type": "object",
+  "properties": {
+    "_id": {
+      "type": "object",
+      "properties": {
+        "$oid": {
+          "type": "string"
+        }
+      }
+    },
+    "href": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "comments": {
+      "type": "number"
+    },
+    "container": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "short_name": {
+          "type": "string"
+        }
+      }
+    },
+    "submit_date": {
+      "type": "number"
+    },
+    "topic": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "short_name": {
+          "type": "string"
+        }
+      }
+    },
+    "promote_date": {
+      "type": "number"
+    },
+    "id": {
+      "type": "string"
+    },
+    "media": {
+      "type": "string"
+    },
+    "diggs": {
+      "type": "number"
+    },
+    "description": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string"
+    },
+    "user": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "registered": {
+          "type": "number"
+        },
+        "fullname": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "profileviews": {
+          "type": "number"
+        }
+      }
+    },
+    "status": {
+      "type": "string"
+    },
+    "shorturl": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "short_url": {
+            "type": "string"
+          },
+          "view_count": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "_id": {
+    "$oid": "54579597e9cd9f37d7fcacd2"
+  },
+  "name": "Sant Julià de Lòria",
+  "country": "AD",
+  "timezone": "Europe/Andorra",
+  "population": 8022,
+  "loc": {
+    "longitude": 1.49129,
+    "latitude": 42.46372
+  }
+}

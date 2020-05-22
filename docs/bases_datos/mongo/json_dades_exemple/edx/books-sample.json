@@ -1,0 +1,28 @@
+{
+  "_id": {
+    "$oid": "4d2a6084c6237b412fcd5597"
+  },
+  "author": [
+    "Brian P. Hogan"
+  ],
+  "isbn": "978-1-93435-668-5",
+  "price": {
+    "currency": "USD",
+    "discount": 21.78,
+    "msrp": 33
+  },
+  "publicationYear": 2010,
+  "tags": [
+    "html5",
+    "cascading style sheets",
+    "css",
+    "html",
+    "pragmatic programmer",
+    "silverlight",
+    "web development",
+    "web standards",
+    "css3",
+    "foo"
+  ],
+  "title": "HTML5 and CSS3"
+}

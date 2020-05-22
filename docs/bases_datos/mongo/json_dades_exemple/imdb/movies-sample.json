@@ -1,0 +1,37 @@
+{
+  "_id": "0499549",
+  "name": "Avatar",
+  "year": 2009,
+  "rating": "PG-13",
+  "runtime": 162,
+  "genre": "AVYS",
+  "earnings_rank": 1,
+  "actors": [
+    {
+      "id": "0941777",
+      "name": "Sam Worthington"
+    },
+    {
+      "id": "0757855",
+      "name": "Zoe Saldana"
+    },
+    {
+      "id": "0000244",
+      "name": "Sigourney Weaver"
+    },
+    {
+      "id": "0002332",
+      "name": "Stephen Lang"
+    },
+    {
+      "id": "0735442",
+      "name": "Michelle Rodriguez"
+    }
+  ],
+  "directors": [
+    {
+      "id": "0000116",
+      "name": "James Cameron"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "name": {
+    "common": "Afghanistan",
+    "official": "Islamic Republic of Afghanistan",
+    "native": {
+      "common": "افغانستان",
+      "official": "د افغانستان اسلامي جمهوریت"
+    }
+  },
+  "tld": [
+    ".af"
+  ],
+  "cca2": "AF",
+  "ccn3": "004",
+  "cca3": "AFG",
+  "currency": [
+    "AFN"
+  ],
+  "callingCode": [
+    "93"
+  ],
+  "capital": "Kabul",
+  "altSpellings": [
+    "AF",
+    "Afġānistān"
+  ],
+  "relevance": "0",
+  "region": "Asia",
+  "subregion": "Southern Asia",
+  "nativeLanguage": "pus",
+  "languages": {
+    "prs": "Dari",
+    "pus": "Pashto",
+    "tuk": "Turkmen"
+  },
+  "translations": {
+    "cym": "Affganistan",
+    "deu": "Afghanistan",
+    "fra": "Afghanistan",
+    "hrv": "Afganistan",
+    "ita": "Afghanistan",
+    "jpn": "アフガニスタン",
+    "nld": "Afghanistan",
+    "rus": "Афганистан",
+    "spa": "Afganistán"
+  },
+  "latlng": [
+    33,
+    65
+  ],
+  "demonym": "Afghan",
+  "borders": [
+    "IRN",
+    "PAK",
+    "TKM",
+    "UZB",
+    "TJK",
+    "CHN"
+  ],
+  "area": 652230
+}

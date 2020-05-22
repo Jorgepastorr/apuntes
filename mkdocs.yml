@@ -1,0 +1,27 @@
+site_name: Apuntes
+site_author: 'Jorge Pastor'
+site_url: 'http://docs.jorgepastorr.tk:50022'
+
+repo_name: 'jorgepastorr/apuntes'
+repo_url: https://github.com/jorgepastorr/apuntes/
+
+theme:
+    name: 'material'
+    palette:
+        primary: 'deep purple'
+        accent: 'deep purple'
+    font:
+        text: 'Roboto'
+        code: 'Roboto Mono'
+
+
+
+markdown_extensions:
+    - admonition
+    - codehilite
+    - pymdownx.tasklist:
+        custom_checkbox: true
+    - pymdownx.tilde
+    - pymdownx.superfences
+
+
