@@ -724,25 +724,3 @@ En el caso de que en un enlace no haya ningún RP, por lo tanto queda un enlace 
 
 El Root Bridge se establece en el switch que tiene la mac mas baja en la vlan en uso, esta prioridad de raíz es modificable mediante comandos al router deseado.
 
-![1557164468048](stpEjemplo.png)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

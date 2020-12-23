@@ -523,7 +523,6 @@ Con lo que sabemos podríamos crear tests complejos sirviéndonos de condiciones
 
 Vamos a hacer un repaso de las más comunes, recordad que siempre devolverán True o False dependiendo de si pasan o no el test:
 
-![](img/errores.PNG)
 
 Si os interesa profundizar os dejo el enlace oficial: https://docs.python.org/3/library/unittest.html
 
