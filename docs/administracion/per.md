@@ -89,30 +89,77 @@ grep -E "$format1|$format2" matriculas
 
 ## CUT
 
-cut recorta caracteres, columnas etc..
+**Cut** muestra sólo una parte de cada linea. hace un corte en vertical
+
+`-c` recorta teniendo en cuenta caracteres y `-f` tiene en cuenta columnas , por defecto cut delimita ppor tabuladores pero con `-d` se puede modificar
 
 ```bash
-# filtrar por caracteres de las filas
-cut -c1-10,12,40- passwd
+cut -c 1,2 /etc/passwd # muestra el caracter 1 y 2 de todas las lineas
+cut -c -3 /etc/passwd	# mestra del  primer caracter al tercero
+cut -c 2- /etc/passwd	# mestra del segundo al final de linea
+cut -c 2-4 /etc/passwd	# muestra del segundo al cuarto caracter
 
-# filtrar por columnbas con un delimitador :
-cut -d: -f1-3,5,7
+# muestra fila 1 y 2 delimitando las filas por :
+cut -d":" -f 1,2
 ```
 
+
+
 ## TR
+
+tr sustitulle letras, en sus filtros también acepta caracteres especiales como `\t`  o clases.
 
 ```bash
 tr "" ""
  que y porqué
 substitución de cada letra por letra no sirve para palabras
 
+➜ echo "casa" | tr "a" "e"
+cese
+
+➜ echo "casa" | tr -d "a" 
+cs
+
+➜ echo "caaasaaaa" | tr -s "a" 
+casa
+
+➜ echo "Mi    casa    tiene 10 lamparas" | tr -s "[:blank:]" " "
+Mi casa tiene 10 lamparas
+
+➜ echo "Mi casa tiene 10 lamparas" | tr "[:alpha:]" "X"
+XX XXXX XXXXX 10 XXXXXXXX
+
+➜ echo "Mi casa tiene 10 lamparas" | tr "[:digit:]" "X"
+Mi casa tiene XX lamparas
+
 echo "la mar estaba salada, merda" | tr "mar" "cel"
 le cel estebe selede, celde
 ```
 
-- En el anterior caso visualmente funciona mal, pero realment sustituye por letra. m => c, a=>e y la r=>l.
+- En el anterior caso visualmente funciona mal, pero realment sustituye por letra. `m => c`, `a=>e` y la `r=>l`.
 
 - En el caso de querer substituir palabras se tiene que utilizar otros comandos como, sed, awk, etc..
+
+
+
+
+
+Tipos de **clases**: representan un conjunto predefinido de caracteres
+
+| clases     | descripcion                                              |
+| ---------- | -------------------------------------------------------- |
+| [:alnum:]  | Las letras y Dígitos                                     |
+| [:alpha:]  | Letras                                                   |
+| [:blank:]  | Espacios en Blanco                                       |
+| [:cntrl:]  | Caracteres de control                                    |
+| [:space:]  | Los Espacios en Blanco verticales y horizontales         |
+| [:graph:]  | Caracteres imprimibles, sin incluir el Espacio en Blanco |
+| [:print:]  | Caracteres imprimibles, incluyendo el Espacio en Blanco  |
+| [:digit:]  | Dígitos                                                  |
+| [:lower:]  | Letras minúsculas.                                       |
+| [:upper:]  | Letras mayúsculas.                                       |
+| [:punct:]  | Signos de puntuación.                                    |
+| [:xdigit:] | DígitosHexadecimales.                                    |
 
 
 
@@ -255,6 +302,31 @@ Jorge:Grup:Nota
 echo "45200"  | sed -r "s/[0-9]{3}$/.&/g"   
 45.200
 ```
+
+## paste
+
+paste concatena linea a linea la informacion de dos ficheros
+
+```bash
+➜ cat notas 
+1
+2
+5
+9
+➜ cat nombres 
+juan
+anna
+pedro
+lucia
+
+➜ paste nombres notas 
+juan	1
+anna	2
+pedro	5
+lucia	9
+```
+
+
 
 ## JOIN 
 

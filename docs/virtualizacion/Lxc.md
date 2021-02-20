@@ -123,6 +123,16 @@ LXC_DHCP_MAX="253"
 
 ## LXC
 
+### Configuración
+
+La configuración por defecto se encuentra en `/etc/lxc/default.con`
+
+Al crear contenedores estos se crean en `/var/lib/lxc/` y la configuración del contenedor se encuentra en `/var/lib/lxc/<nombre contenedor>/config`
+
+La información de la vconfiguración de contenedores se encuentra en `man lxc.container.conf`
+
+
+
 ### Listar imagenes base
 
 Las plantillas de imagenes se almacenan en `/usr/share/lxc/templates`
@@ -188,6 +198,36 @@ lxc-snapshot -n deb --restore snap0
 ```
 
 
+
+### Autoestart
+
+Loos contenedores tienen la opción de arrancar con el sistema si se asigna la opción  `lxc.start.auto=1`
+
+```bash
+➜  ~ sudo cat /var/lib/lxc/p1/config
+...
+lxc.start.auto = 1
+lxc.start.delay = 10
+lxc.start.order = 100
+
+lxc.group = debian
+```
+
+- `lxc.start.order` es la prioridad de arrancar entre contenedores, el numero mas alto tiene prioridad, es decir arranca primero
+- `lxc.start.delay` es un timeout de espera para arrncar el siguiente contenedor.
+
+
+
+### Limitar recursos
+
+limita la ram y la cpu de un contenedor, en el siguiente ejemplo, 128MB ram 
+
+```bash
+➜  ~ sudo cat /var/lib/lxc/p1/config
+...
+lxc.cgroup.memory.limit_in_bytes = 134217728
+lxc.cgroup.cpuset.cpus = 0,3
+```
 
 
 

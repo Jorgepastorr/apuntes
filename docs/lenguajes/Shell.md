@@ -114,7 +114,9 @@ ver contenido del paquete
 rpl -ql paquete  
 ```
 
-# Bash Scripting
+
+
+## Bash Scripting
 
 ## Estructura de un script
 
