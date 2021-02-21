@@ -147,6 +147,7 @@ Las plantillas de imagenes se almacenan en `/usr/share/lxc/templates`
 
 lxc-create --name deb --template debian 
 lxc-create --name deb --template debian -- -r stretch 
+lxc-create -n c1  -t download  -- -d debian -r buster -a amd64
 lxc-create -n deb -t debian -- -r stretch -a i386
 lxc-create -n deb -f config-file.conf -t debian -- -r stretch 
 
@@ -199,7 +200,7 @@ lxc-snapshot -n deb --restore snap0
 
 
 
-### Autoestart
+### Autostart
 
 Loos contenedores tienen la opción de arrancar con el sistema si se asigna la opción  `lxc.start.auto=1`
 
@@ -227,6 +228,99 @@ limita la ram y la cpu de un contenedor, en el siguiente ejemplo, 128MB ram
 ...
 lxc.cgroup.memory.limit_in_bytes = 134217728
 lxc.cgroup.cpuset.cpus = 0,3
+```
+
+
+
+### Unprivileged
+
+Correr containers sin privilegios de administrador (como usuario)
+
+La principal diferencia será que los contenedores se van a crear en el home del usuario y la configuración de directorios quedaria así:
+
+```bash
+/etc/lxc/lxc.conf => ~/.config/lxc/lxc.conf
+/etc/lxc/default.conf => ~/.config/lxc/default.conf
+/var/lib/lxc => ~/.local/share/lxc
+/var/lib/lxcsnaps => ~/.local/share/lxcsnaps
+/var/cache/lxc => ~/.cache/lxc
+```
+
+Es necesario tener un mapa de gid como de uid, esto normalmente se tiene por defecto.
+
+```bash
+➜ grep $USER /etc/sub?id
+/etc/subgid:debian:100000:65536
+/etc/subuid:debian:100000:65536
+```
+
+En caso de no tener un mpa asignado, se puede crear uno.
+
+```bash
+sudo usermod --add-subuids 100000-165536 $USER
+sudo usermod --add-subgids 100000-165536 $USER
+```
+
+
+
+Tener habilitado los privilegios en el kerner.
+
+```bash
+# mirar como esta definido
+sudo sysctl kernel.unprivileged_userns_clone
+# habilitar temporalmente
+sudo sysctl -w kernel.unprivileged_userns_clone=1
+# habilitarlo 
+echo "kernel.unprivileged_userns_clone=1" | sudo tee /etc/sysctl.d/80-lxc-userns.conf
+```
+
+Copiar el archivo de configuración a la ruta del usuario y añadirle los permisos de los mapas
+
+```bash
+mkdir ~/.config/lxc
+cp /etc/lxc/default.conf ~/.config/lxc/default.conf
+➜ cat /etc/lxc/default.conf
+...
+lxc.idmap = u 0 100000 65536
+lxc.idmap = g 0 100000 65536
+```
+
+Para finalizar dar permiso al usuario que use el bridge, la interfaz `lxcbr0`  puede cambiar si has definido con nombre diferente en la configuracón.
+
+```bash
+cat  /etc/lxc/lxc-usernet
+<your username> veth lxcbr0 10
+```
+
+Lanzar contenedor
+
+```bash
+➜ lxc-create -n p1  -t download  -- -d debian -r buster -a amd64
+```
+
+
+
+### Volumenes
+
+Para montar otro sistema de archivos en el contenedor, agregue a `/var/lib/lxc/mycontainer/config` y despues reinicie el contenedor:
+
+```bash
+lxc.mount.entry=/path/in/host/mount_point mount_point_in_container none bind 0 0
+# lo mismo
+lxc.mount.entry = /var/www/html  mnt/data  none bind 0 0
+```
+
+Otro ejemplo de montaje de enlace:
+
+```bash
+# Exposes /dev/sde in the container
+lxc.mount.entry = /dev/sde dev/sde none bind,optional,create=file
+```
+
+Para montar en otro sistema de archivos, por ejemplo, LVM en un punto de montaje de contenedor
+
+```bash
+lxc.mount.entry = /dev/mapper/lvmfs-home-partition home ext4 defaults 0 2
 ```
 
 
