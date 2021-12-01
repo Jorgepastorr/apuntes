@@ -8,6 +8,7 @@ repo_url: https://github.com/jorgepastorr/apuntes/
 theme:
     name: 'material'
     palette:
+        scheme: 'slate'
         primary: 'deep purple'
         accent: 'deep purple'
     font:
