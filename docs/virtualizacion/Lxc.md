@@ -159,6 +159,7 @@ lxc-info -n deb
 lxc-start -n deb
 lxc-stop -n deb
 lxc-destroy -n deb
+lxc-destroy -n deb --snapshots # eliminar contenedor con snaps
 
 # entrar al contenedor
 lxc-attach -n deb bash
@@ -179,11 +180,12 @@ lxc-copy  --rename debi --newname dex
 
 ### Snapshot
 
-Para crear snapshots y restaurarlo los contenedores afectados tienen que estar apagados
+Para crear snapshots y restaurarlos los contenedores afectados tienen que estar apagados, al restaurar un snapshot si se le indica creara un contenedor nuevo.
 
 ```bash
 # crear snapshot del contenedor deb con un comentario
-lxc-snapshot -n deb --comment comment-snap 
+lxc-snapshot -n deb # sin comentario
+lxc-snapshot -n deb --comment file-comment-snap 
 
 # listar snaps del contenedor
 lxc-snapshot -n deb -L                
@@ -192,12 +194,26 @@ snap0 (/var/lib/lxc/deb/snaps) 2020:12:23 08:49:15
 # listar snaps del contenedor y sus comentarios
 lxc-snapshot -n deb -L --showcomments
 snap0 (/var/lib/lxc/deb/snaps) 2020:12:23 08:49:15
-Snap01 de container deb
+Primer snap del container deb
 
 # restaurar snapshot
 lxc-snapshot -n deb --restore snap0
+
+# restaurar snapshot snap0 de vm1 creando un contenedor nuevo vm2
+lxc-snapshot -n vm1 --restore snap0 --newname vm2
+lxc-snapshot -n vm1 -r snap0 -N vm2
+
+# eliminar snapshot 
+lxc-snapshot -n vm1 --destroy snap2
+lxc-snapshot -n vm1 -d snap2
 ```
 
+Al restaurar un snapshot en un conenedor nuevo por defecto se crea en `/var/lib/lxc` esto se puede canviar especificando una ruta diferente
+
+```bash
+lxc-snapshot -n vm1 --restore snap0 --newname vm2 --lxcpath /link/lxc
+lxc-snapshot -n vm1 -r snap0 -N vm2 -P /link/lxc
+```
 
 
 ### Autostart
