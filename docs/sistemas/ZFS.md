@@ -438,6 +438,9 @@ zfs send -cpev tank/dana@snap1 | ssh host2 zfs recv newtank/dana	# enviar snap
 
 zfs send -i tank/dana@snap1 tank/dana@snap2 | ssh host2 zfs recv -F newtank/dana	# enviar icremental snap
 # -F forzar rollback a la instantanea mas reciente antes de recibir
+
+# enviar datast con todos los snapshots
+zfs send -R tank/dataset@snapMasReciente | ssh <ip> zfs recv tank/dataset
 ```
 
 
@@ -466,7 +469,21 @@ zfs set compression=off <NombrePool>
 > Se recomienda usar el algoritmo lz4, ya que agrega muy poca sobrecarga de CPU. También están disponibles otros algoritmos como lzjb y gzip-N, donde N es un  número entero de 1 (más rápido) a 9 (mejor relación de compresión).  Dependiendo del algoritmo y de la compresión de los datos, tener la  compresión habilitada puede incluso aumentar el rendimiento.
 
 
+#### Comprimir dataset existente
 
+En el caso de tener un dataset sin compresión activada y activarla, los archivos existentes no se comprimen, solo los nuevos. En este caso hay que sobresscribir todo el dataset.
+
+```bash
+# activar compresion
+zfs set compress=on tank/dataset
+
+# replicar dataset
+zfs send -R tank/dataset | zfs recv tank/newDataset
+
+# eliminar el antiguo y renombrar
+zfs destroy -r tank/dataset
+zfs rename tank/newDataset tank/dataset
+```
 
 
 

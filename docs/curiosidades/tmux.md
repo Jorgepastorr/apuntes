@@ -140,6 +140,14 @@ ctrl + b & # en todas las ventanas
 tmux kill-session -t mysesión # matar sesión
 ```
 
+##### Copiar y pegar
+
+En tmux se puede copiar y pegar como en todas las terminales `ctrl + Mayus + c|v`, o en caso de no utilizar entorno gráfico dispone de su propio Copy&Paste muy parecido a vim.
+
+- Entrar "copy mode" presionando `CTRL + b, [`.
+- Utilizar las flechas para mover el cursor por la pantalla. Presiona `CTRL + SPACE` para empezar a copiar.
+- Usa las flexas para moverte al final det texto que quieres copiar. Presiona `ALT + w` o `CTRL + w` para copiar.
+- Presiona `CTRL + b, ]` para copiar, incluso en otras ventanas Tmux abiertas en esa misma sessión.
 
 
 ## Compartir sesión
