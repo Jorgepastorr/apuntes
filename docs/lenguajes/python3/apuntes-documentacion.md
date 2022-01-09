@@ -170,7 +170,7 @@ mi_paquete/
      |_ hola.py
 ```
 
-#### __init______.py
+#### __init__.py
 
 ```python
 """ Este es el docstring de mi_paquete """

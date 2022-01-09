@@ -1,11 +1,12 @@
 # Módulos
 
 
-# El módulo collections
+## El módulo collections
 
 
 
-## Contador
+### Contador
+
 Es una subclase de diccionario utilizada para realizar cuentas.
 
 Cuenta las veces que hay repetido un elemento, sea númerico o caracter.
@@ -14,7 +15,6 @@ Cuenta las veces que hay repetido un elemento, sea númerico o caracter.
 ```python
 from collections import Counter
 ```
-
 
 ```python
 l = [1,2,3,4,1,2,3,1,2,1]
@@ -56,23 +56,22 @@ Counter(animales)
              'r': 8,
              't': 1})
 
-##### Con split separamos por palabras
+
+Con split separamos por palabras
 
 
 ```python
 animales.split()
 ```
 
-
     ['gato', 'perro', 'canario', 'perro', 'canario', 'perro']
 
-##### Ahora podemos contar las palabras repetidas
+Ahora podemos contar las palabras repetidas
 
 
 ```python
 Counter(animales.split())
 ```
-
 
     Counter({'canario': 2, 'gato': 1, 'perro': 3})
 
@@ -92,10 +91,7 @@ c = Counter(animales.split())
 c.most_common(1)
 ```
 
-
     [('perro', 3)]
-
-
 
 
 ```python
@@ -116,10 +112,8 @@ c.most_common()
     [('perro', 3), ('canario', 2), ('gato', 1)]
 
 
-
-
-
 ## Tuplas con nombres
+
 Subclase de las tuplas utilizada para crear pequeñas estructuras inmutables, parecidas a una clase y sus objetos pero mucho más simples.
 
 
@@ -132,26 +126,17 @@ t = (20,40,60)
 t[0]
 ```
 
-
     20
-
-
-
 
 ```python
 t[-1]
 ```
 
-
     60
-
-
-
 
 ```python
 from collections import namedtuple
 ```
-
 
 ```python
 Persona = namedtuple('Persona','nombre apellido edad')
@@ -167,66 +152,41 @@ p = Persona(nombre="Hector",apellido="Costa",edad=27)
 p.nombre
 ```
 
-
     'Hector'
-
-
-
 
 ```python
 p.apellido
 ```
 
-
     'Costa'
-
-
-
 
 ```python
 p.edad
 ```
 
-
     27
-
-
-
 
 ```python
 p
 ```
 
-
     Persona(nombre='Hector', apellido='Costa', edad=27)
-
-
-
 
 ```python
 p[0]
 ```
 
-
     'Hector'
-
-
-
 
 ```python
 p[1]
 ```
 
-
     'Costa'
-
-
-
 
 ```python
 p[-1]
 ```
-
 
     27
 
@@ -236,7 +196,6 @@ Al ser una tupla, no se puede modificar
 ```python
 p.nombre = "Hola"
 ```
-
 
     ---------------------------------------------------------------------------
     
@@ -249,16 +208,13 @@ p.nombre = "Hola"
     AttributeError: can't set attribute
 
 
-
-# El módulo datetime
+## El módulo datetime
 
 
 
 ```python
 import datetime
 ```
-
-## El objeto datetime
 
 ```python
 dt = datetime.datetime.now() # Ahora
@@ -269,8 +225,6 @@ dt
 datetime.datetime(2016, 6, 18, 21, 29, 28, 607208)
 ```
 
-
-
 ```python
 dt.year # año
 ```
@@ -278,7 +232,6 @@ dt.year # año
 ```
 2016
 ```
-
 
 
 ```python
@@ -289,8 +242,6 @@ dt.month # mes
 6
 ```
 
-
-
 ```python
 dt.day # día
 ```
@@ -298,8 +249,6 @@ dt.day # día
 ```
 18
 ```
-
-
 
 ```python
 print("{}:{}:{}".format(dt.hour, dt.minute, dt.second))
@@ -309,8 +258,6 @@ print("{}:{}:{}".format(dt.hour, dt.minute, dt.second))
 21:29:28
 ```
 
-
-
 ```python
 print("{}/{}/{}".format(dt.day, dt.month, dt.year))
 ```
@@ -319,9 +266,7 @@ print("{}/{}/{}".format(dt.day, dt.month, dt.year))
 18/6/2016
 ```
 
-
-
-#### Crear un datetime manualmente (year, month, day, hour=0, minute=0, second=0, microsecond=0, tzinfo=None)
+Crear un datetime manualmente (year, month, day, hour=0, minute=0, second=0, microsecond=0, tzinfo=None)
 
 *Notad que sólo son obligatorios el año, el mes y el día*
 
@@ -356,8 +301,6 @@ AttributeError                            Traceback (most recent call last)
 AttributeError: attribute 'year' of 'datetime.date' objects is not writable
 ```
 
-
-
 ```python
 dt = dt.replace(year=3000) # Asignación correcta con .replace()
 ```
@@ -370,11 +313,9 @@ dt
 datetime.datetime(3000, 1, 1, 0, 0)
 ```
 
+### Formateos
 
-
-## Formateos
-
-### Formato automático ISO (Organización Internacional de Normalización) 
+Formato automático ISO (Organización Internacional de Normalización) 
 
 ```python
 dt = datetime.datetime.now()
@@ -387,9 +328,9 @@ dt.isoformat()
 
 
 
-### Formateo munual (inglés por defecto)
+Formateo munual (inglés por defecto)
 
-https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior
+- [datetime-strftime](https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior)
 
 ```python
 dt.strftime("%A %d %B %Y %I:%M")
@@ -399,50 +340,7 @@ dt.strftime("%A %d %B %Y %I:%M")
 'Saturday 18 June 2016 09:37'
 ```
 
-
-
-### Códigos de idiomas
-
-https://msdn.microsoft.com/es-es/es/library/cdax410z.aspx
-
-```python
-import locale
-```
-
-```python
-locale.setlocale(locale.LC_ALL, 'es-ES') # Establece idioma en "es-ES" (español de España)
-locale.setlocale(locale.LC_ALL, '') # Establece idioma del sistema
-```
-
-```
-'es-ES'
-```
-
-
-
-```python
-dt.strftime("%A %d %B %Y %I:%M")
-```
-
-```
-'sábado 18 junio 2016 09:37'
-
-```
-
-
-
-```python
-dt.strftime("%A %d de %B del %Y - %H:%M") # %I 12h - %H 24h
-```
-
-```
-'sábado 18 de junio del 2016 - 21:37'
-
-```
-
-
-
-## Sumando y restando tiempo con timedelta
+### tiempo con timedelta
 
 ```python
 dt = datetime.datetime.now()
@@ -492,6 +390,43 @@ hace_dos_semanas.strftime("%A %d de %B del %Y - %H:%M")
 'sábado 04 de junio del 2016 - 17:30'
 
 ```
+
+
+## Códigos de idiomas
+
+- https://msdn.microsoft.com/es-es/es/library/cdax410z.aspx
+
+```python
+import locale
+```
+
+```python
+locale.setlocale(locale.LC_ALL, 'es-ES') # Establece idioma en "es-ES" (español de España)
+locale.setlocale(locale.LC_ALL, '') # Establece idioma del sistema
+```
+
+```
+'es-ES'
+```
+
+```python
+dt.strftime("%A %d %B %Y %I:%M")
+```
+
+```
+'sábado 18 junio 2016 09:37'
+
+```
+
+```python
+dt.strftime("%A %d de %B del %Y - %H:%M") # %I 12h - %H 24h
+```
+
+```
+'sábado 18 de junio del 2016 - 21:37'
+```
+
+
 
 
 
@@ -548,7 +483,7 @@ dt.strftime("%A %d de %B del %Y - %H:%M") # %I 12h - %H 24h
 
 ```
 
-# El módulo math
+## El módulo math
 
 ```python
 import math
@@ -711,7 +646,7 @@ math.e   # Constante e
 2.718281828459045
 ```
 
-# El módulo random
+## El módulo random
 
 ```python
 import random
