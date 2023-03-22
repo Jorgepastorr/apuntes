@@ -407,7 +407,8 @@ zpool history   # ver historial de comandos
 ### Crear volumen
 
 ```bash
-zfs create tank/documents
+zfs 
+create tank/documents
 zfs destroy tank/documents
 
 zfs create -o compression=on tank/documents 
@@ -441,8 +442,54 @@ zfs send -i tank/dana@snap1 tank/dana@snap2 | ssh host2 zfs recv -F newtank/dana
 
 # enviar datast con todos los snapshots
 zfs send -R tank/dataset@snapMasReciente | ssh <ip> zfs recv tank/dataset
+
+# si no existe lista snapshots remotos 
+zfs send -cpev <dataset@snapshot> | ssh <destino> zfs recv -vsd pool
+
+# envia un incremental
+zfs send -cpevI <@snapshot> <dataset@snapshot>  | ssh <destino> zfs recv -Fvd pool
 ```
 
+
+
+Opciones mas usadas de send y recieve
+
+```bash
+zfs send
+	-p  # enviar propiedades
+	-v  # vervose
+	-I  # enviar todas las instantaneas intermedias entre "snapA" y "snapB"
+	-c  # comprime el envio
+	-e  # comprimido optimizado
+	
+zfs recv
+	-v  # vervose
+	-e  # Utiliza el ultimo snap (de send) para determinar el nombre de la nueva instantánea
+	-d  # Utilice todos menos el primer elemento de la ruta de la instantánea enviada 
+	-F  # fuerza rolback en el destino al snap mas reciente
+	-s  # Si se interrumpe la recepción, guarde el estado de recepción parcial, en lugar de eliminarlo.
+```
+
+### Clones
+
+[doc oracle](https://docs.oracle.com/cd/E26921_01/html/E25823/gbcxz.html)
+
+Crear un clon partiendo de un snap
+
+	 zfs clone tank/test/productA@today tank/test/productAbeta
+
+#### Sustitur clon por dataset original
+
+Sustituir el sistema de archivos, se le asignaran al clon los snaps del original
+
+	zfs promote tank/test/productAbeta
+
+	# renombramos datasets 
+	zfs rename tank/test/productA tank/test/productAlegacy
+	zfs rename tank/test/productAbeta tank/test/productA
+
+	# destruimos original
+	zfs destroy tank/test/productAlegacy
 
 
 ### Propiedades
