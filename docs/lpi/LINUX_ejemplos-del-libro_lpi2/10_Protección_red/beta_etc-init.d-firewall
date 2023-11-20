@@ -1,0 +1,12 @@
+#!/bin/bash
+case $1 in
+start)
+  /opt/scripts/pf1.sh
+;;
+stop)
+  /opt/scripts/pf0.sh
+;;
+status)
+  iptables -L
+;;
+esac

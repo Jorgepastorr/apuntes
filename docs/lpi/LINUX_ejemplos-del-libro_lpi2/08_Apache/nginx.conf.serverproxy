@@ -1,0 +1,13 @@
+server {
+        listen   80;
+        server_name public.pas.net;
+        root /usr/share/nginx/public;
+        index index.html;
+        location ~* \.php[2-9]?$ {
+                try_files $uri $uri/ @dyn;
+        }
+
+        location @dyn {
+                proxy_pass http://beta;
+        }
+}

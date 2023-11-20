@@ -1,0 +1,627 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>101_Arquitectura_del_sistema</title><link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; --title-bar-height:20px; }
+.mac-os-11 { --title-bar-height:28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.html-for-mac .inline-math-svg .MathJax_SVG { vertical-align: 0.2px; }
+.md-math-block .MathJax_SVG_Display { text-align: center; margin: 0px; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; overflow-y: hidden; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: var(--monospace); }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; overflow-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none 0s ease 0s; }
+.MathJax_SVG_Display svg { vertical-align: middle !important; margin-bottom: 0px !important; margin-top: 0px !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+mark .md-meta { color: rgb(0, 0, 0); opacity: 0.3 !important; }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-require-zoom-fix foreignobject { font-size: var(--mermaid-font-zoom); }
+
+
+.CodeMirror { height: auto; }
+.CodeMirror.cm-s-inner { background: inherit; }
+.CodeMirror-scroll { overflow: auto hidden; z-index: 3; }
+.CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler { background-color: rgb(255, 255, 255); }
+.CodeMirror-gutters { border-right: 1px solid rgb(221, 221, 221); background: inherit; white-space: nowrap; }
+.CodeMirror-linenumber { padding: 0px 3px 0px 5px; text-align: right; color: rgb(153, 153, 153); }
+.cm-s-inner .cm-keyword { color: rgb(119, 0, 136); }
+.cm-s-inner .cm-atom, .cm-s-inner.cm-atom { color: rgb(34, 17, 153); }
+.cm-s-inner .cm-number { color: rgb(17, 102, 68); }
+.cm-s-inner .cm-def { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-variable { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-variable-2 { color: rgb(0, 85, 170); }
+.cm-s-inner .cm-variable-3 { color: rgb(0, 136, 85); }
+.cm-s-inner .cm-string { color: rgb(170, 17, 17); }
+.cm-s-inner .cm-property { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-operator { color: rgb(152, 26, 26); }
+.cm-s-inner .cm-comment, .cm-s-inner.cm-comment { color: rgb(170, 85, 0); }
+.cm-s-inner .cm-string-2 { color: rgb(255, 85, 0); }
+.cm-s-inner .cm-meta { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-qualifier { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-builtin { color: rgb(51, 0, 170); }
+.cm-s-inner .cm-bracket { color: rgb(153, 153, 119); }
+.cm-s-inner .cm-tag { color: rgb(17, 119, 0); }
+.cm-s-inner .cm-attribute { color: rgb(0, 0, 204); }
+.cm-s-inner .cm-header, .cm-s-inner.cm-header { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-quote, .cm-s-inner.cm-quote { color: rgb(0, 153, 0); }
+.cm-s-inner .cm-hr, .cm-s-inner.cm-hr { color: rgb(153, 153, 153); }
+.cm-s-inner .cm-link, .cm-s-inner.cm-link { color: rgb(0, 0, 204); }
+.cm-negative { color: rgb(221, 68, 68); }
+.cm-positive { color: rgb(34, 153, 34); }
+.cm-header, .cm-strong { font-weight: 700; }
+.cm-del { text-decoration: line-through; }
+.cm-em { font-style: italic; }
+.cm-link { text-decoration: underline; }
+.cm-error { color: red; }
+.cm-invalidchar { color: red; }
+.cm-constant { color: rgb(38, 139, 210); }
+.cm-defined { color: rgb(181, 137, 0); }
+div.CodeMirror span.CodeMirror-matchingbracket { color: rgb(0, 255, 0); }
+div.CodeMirror span.CodeMirror-nonmatchingbracket { color: rgb(255, 34, 34); }
+.cm-s-inner .CodeMirror-activeline-background { background: inherit; }
+.CodeMirror { position: relative; overflow: hidden; }
+.CodeMirror-scroll { height: 100%; outline: 0px; position: relative; box-sizing: content-box; background: inherit; }
+.CodeMirror-sizer { position: relative; }
+.CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar { position: absolute; z-index: 6; display: none; }
+.CodeMirror-vscrollbar { right: 0px; top: 0px; overflow: hidden; }
+.CodeMirror-hscrollbar { bottom: 0px; left: 0px; overflow: hidden; }
+.CodeMirror-scrollbar-filler { right: 0px; bottom: 0px; }
+.CodeMirror-gutter-filler { left: 0px; bottom: 0px; }
+.CodeMirror-gutters { position: absolute; left: 0px; top: 0px; padding-bottom: 30px; z-index: 3; }
+.CodeMirror-gutter { white-space: normal; height: 100%; box-sizing: content-box; padding-bottom: 30px; margin-bottom: -32px; display: inline-block; }
+.CodeMirror-gutter-wrapper { position: absolute; z-index: 4; background: 0px 0px !important; border: none !important; }
+.CodeMirror-gutter-background { position: absolute; top: 0px; bottom: 0px; z-index: 4; }
+.CodeMirror-gutter-elt { position: absolute; cursor: default; z-index: 4; }
+.CodeMirror-lines { cursor: text; }
+.CodeMirror pre { border-radius: 0px; border-width: 0px; background: 0px 0px; font-family: inherit; font-size: inherit; margin: 0px; white-space: pre; overflow-wrap: normal; color: inherit; z-index: 2; position: relative; overflow: visible; }
+.CodeMirror-wrap pre { overflow-wrap: break-word; white-space: pre-wrap; word-break: normal; }
+.CodeMirror-code pre { border-right: 30px solid transparent; width: fit-content; }
+.CodeMirror-wrap .CodeMirror-code pre { border-right: none; width: auto; }
+.CodeMirror-linebackground { position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px; z-index: 0; }
+.CodeMirror-linewidget { position: relative; z-index: 2; overflow: auto; }
+.CodeMirror-wrap .CodeMirror-scroll { overflow-x: hidden; }
+.CodeMirror-measure { position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden; }
+.CodeMirror-measure pre { position: static; }
+.CodeMirror div.CodeMirror-cursor { position: absolute; visibility: hidden; border-right: none; width: 0px; }
+.CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+.CodeMirror-focused div.CodeMirror-cursor { visibility: inherit; }
+.cm-searching { background: rgba(255, 255, 0, 0.4); }
+@media print {
+  .CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+}
+
+
+:root {
+    --side-bar-bg-color: #fafafa;
+    --control-text-color: #777;
+}
+
+@include-when-export url(https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext);
+
+/* open-sans-regular - latin-ext_latin */
+  /* open-sans-italic - latin-ext_latin */
+    /* open-sans-700 - latin-ext_latin */
+    /* open-sans-700italic - latin-ext_latin */
+  html {
+    font-size: 16px;
+}
+
+body {
+    font-family: "Open Sans","Clear Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: rgb(51, 51, 51);
+    line-height: 1.6;
+}
+
+#write {
+    max-width: 860px;
+  	margin: 0 auto;
+  	padding: 30px;
+    padding-bottom: 100px;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+		max-width: 1024px;
+	}
+}
+
+@media only screen and (min-width: 1800px) {
+	#write {
+		max-width: 1200px;
+	}
+}
+
+#write > ul:first-child,
+#write > ol:first-child{
+    margin-top: 30px;
+}
+
+a {
+    color: #4183C4;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+}
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+    text-decoration: none;
+}
+h1 tt,
+h1 code {
+    font-size: inherit;
+}
+h2 tt,
+h2 code {
+    font-size: inherit;
+}
+h3 tt,
+h3 code {
+    font-size: inherit;
+}
+h4 tt,
+h4 code {
+    font-size: inherit;
+}
+h5 tt,
+h5 code {
+    font-size: inherit;
+}
+h6 tt,
+h6 code {
+    font-size: inherit;
+}
+h1 {
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+}
+h2 {
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+}
+
+/*@media print {
+    .typora-export h1,
+    .typora-export h2 {
+        border-bottom: none;
+        padding-bottom: initial;
+    }
+
+    .typora-export h1::after,
+    .typora-export h2::after {
+        content: "";
+        display: block;
+        height: 100px;
+        margin-top: -96px;
+        border-top: 1px solid #eee;
+    }
+}*/
+
+h3 {
+    font-size: 1.5em;
+    line-height: 1.43;
+}
+h4 {
+    font-size: 1.25em;
+}
+h5 {
+    font-size: 1em;
+}
+h6 {
+   font-size: 1em;
+    color: #777;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table{
+    margin: 0.8em 0;
+}
+li>ol,
+li>ul {
+    margin: 0 0;
+}
+hr {
+    height: 2px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+li p.first {
+    display: inline-block;
+}
+ul,
+ol {
+    padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+    margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+    margin-bottom: 0;
+}
+blockquote {
+    border-left: 4px solid #dfe2e5;
+    padding: 0 15px;
+    color: #777777;
+}
+blockquote blockquote {
+    padding-right: 0;
+}
+table {
+    padding: 0;
+    word-break: initial;
+}
+table tr {
+    border-top: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+table th {
+    font-weight: bold;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+table td {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+table th:first-child,
+table td:first-child {
+    margin-top: 0;
+}
+table th:last-child,
+table td:last-child {
+    margin-bottom: 0;
+}
+
+.CodeMirror-lines {
+    padding-left: 4px;
+}
+
+.code-tooltip {
+    box-shadow: 0 1px 1px 0 rgba(0,28,36,.3);
+    border-top: 1px solid #eef2f2;
+}
+
+.md-fences,
+code,
+tt {
+    border: 1px solid #e7eaed;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    padding: 0;
+    padding: 2px 4px 0px 4px;
+    font-size: 0.9em;
+}
+
+code {
+    background-color: #f3f4f4;
+    padding: 0 2px 0 2px;
+}
+
+.md-fences {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
+
+
+.md-task-list-item > input {
+  margin-left: -1.3em;
+}
+
+@media print {
+    html {
+        font-size: 13px;
+    }
+    table,
+    pre {
+        page-break-inside: avoid;
+    }
+    pre {
+        word-wrap: break-word;
+    }
+}
+
+.md-fences {
+	background-color: #f8f8f8;
+}
+#write pre.md-meta-block {
+	padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    border-radius: 3px;
+    color: #777777;
+    margin-top: 0 !important;
+}
+
+.mathjax-block>.code-tooltip {
+	bottom: .375rem;
+}
+
+.md-mathjax-midline {
+    background: #fafafa;
+}
+
+#write>h3.md-focus:before{
+	left: -1.5625rem;
+	top: .375rem;
+}
+#write>h4.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h5.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h6.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+.md-image>.md-meta {
+    /*border: 1px solid #ddd;*/
+    border-radius: 3px;
+    padding: 2px 0px 0px 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
+
+.md-tag {
+    color: #a7a7a7;
+    opacity: 1;
+}
+
+.md-toc { 
+    margin-top:20px;
+    padding-bottom:20px;
+}
+
+.sidebar-tabs {
+    border-bottom: none;
+}
+
+#typora-quick-open {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+
+#typora-quick-open-item {
+    background-color: #FAFAFA;
+    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+    border-style: solid;
+    border-width: 1px;
+}
+
+/** focus mode */
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header, .context-menu, .megamenu-content, footer{
+    font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state{
+    visibility: visible;
+}
+
+.mac-seamless-mode #typora-sidebar {
+    background-color: #fafafa;
+    background-color: var(--side-bar-bg-color);
+}
+
+.md-lang {
+    color: #b4654d;
+}
+
+.html-for-mac .context-menu {
+    --item-hover-bg-color: #E6F0FE;
+}
+
+#md-notification .btn {
+    border: 0;
+}
+
+.dropdown-menu .divider {
+    border-color: #e5e5e5;
+}
+
+.ty-preferences .window-content {
+    background-color: #fafafa;
+}
+
+.ty-preferences .nav-group-item.active {
+    color: white;
+    background: #999;
+}
+
+ .typora-export li, .typora-export p, .typora-export,  .footnote-line {white-space: normal;} 
+</style>
+</head>
+<body class='typora-export'>
+<div id='write'  class=''><h1><a name="101-arquitectura-del-sistema" class="md-header-anchor"></a><span>101 Arquitectura del sistema</span></h1><p>&nbsp;</p><h2><a name="selección-y-configuración-del-hardaware" class="md-header-anchor"></a><span>Selección y configuración del hardaware</span></h2><p>&nbsp;</p><p><strong><span>IRQ</span></strong><span>: Es una señal que se envía a la CPU para  que gestione una petición de hardaware (ratón, teclado, etc...). Se muestran en </span><code>/proc/interrupts</code></p><p><strong><span>DMA</span></strong><span>:  ( Direct Memory Acces ) El dispositivo puede acceder a bloques de memoria sin que sea necesaria la CPU. Fichero: </span><code>/proc/dma</code></p><p><strong><span>Direcciones E/S:</span></strong><span> Trozos de memoria para los dispositivos se comuniquen con la CPU. fichero: </span><code>/proc/ioports</code></p><p><strong><span>coldplug/hotplug</span></strong><span>: Son los dispositivos que se tienden a conectar en frío o en caliente.</span></p><p><strong><span>Sysfs</span></strong><span>: Es un sistema virtual de ficheros que se encuentra en </span><code>/sys/</code><span>, donde puede acceder a información sobre los dispositivos.</span></p><p><strong><span>D-Bus</span></strong><span>: Permite que los procesos se comuniquen y se notifiquen eventos. ( por ejemplo, se a conectado un USB)</span></p><p><strong><span>udev</span></strong><span>: Es responsable de la identificación y configuración de los dispositivos. Es un sistema de archivos virtual en </span><code>/dev/</code><span> donde se crearán o eliminaran ficheros que representan dispositivos según estén disponibles o no.</span></p><p>&nbsp;</p><ul><li><strong><span>/proc</span></strong><span> El  sistema de archivos </span><code>/proc</code><span>  almacena información de procesos activos en el sistema</span></li><li><strong><span>/sys</span></strong><span> El sistema de archivos virtual  </span><code>/sys</code><span> es creado para desaogar a </span><code>/proc</code><span>  y dividir la información dejando a </span><code>/sys</code><span>  solamente la información sobre los dispositivos.</span></li><li><strong><span>/dev</span></strong><span> El sistema de archivos </span><code>/dev</code><span> hace referencia a los dispositivos según esten disponibles</span></li></ul><p>&nbsp;</p><p><span>Comandos de gestión hardware:</span></p><p><strong><span>lspci</span></strong><span>: muestra información sobre los buses PCI y los dispositivos que tienen conectados</span></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-attribute">-v</span> <span class="cm-attribute">-vv</span><span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-comment"># vervose</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-attribute">-s</span> [[[[&lt;domain&gt;]:]&lt;bus&gt;]:][&lt;slot&gt;][.[&lt;func&gt;]] <span class="cm-comment"># información solo del dispositivo seleccionado</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-attribute">-b</span> <span class="cm-tab" role="presentation" cm-text="	"> </span><span class="cm-comment"># muestra todos los numeros y direcciones IRQ</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-attribute">-t</span><span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-comment"># muestra diagram de todos los buses, bridges y devices</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 114px;"></div><div class="CodeMirror-gutters" style="display: none; height: 114px;"></div></div></div></pre><p>&nbsp;</p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">➜ lspci <span class="cm-attribute">-v</span> <span class="cm-attribute">-s</span> <span class="cm-number">06</span>:00.0 </span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-number">06</span>:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Redwood PRO [Radeon HD <span class="cm-number">5550</span>/5570/5630/6510/6610/7570] (prog-if <span class="cm-number">00</span> [VGA controller])</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>Subsystem: PC Partner Limited / Sapphire Technology Radeon HD <span class="cm-number">5570</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>Flags: bus master, fast devsel, latency <span class="cm-number">0</span>, IRQ <span class="cm-number">74</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>Memory at e0000000 (64-bit, prefetchable) <span class="cm-def">[size</span><span class="cm-operator">=</span>256M]</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>Memory at fe920000 (64-bit, non-prefetchable) <span class="cm-def">[size</span><span class="cm-operator">=</span>128K]</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>I/O ports at e000 <span class="cm-def">[size</span><span class="cm-operator">=</span><span class="cm-number">256</span>]</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>Expansion ROM at 000c0000 [disabled] <span class="cm-def">[size</span><span class="cm-operator">=</span>128K]</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>Capabilities: &lt;access denied&gt;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>Kernel driver <span class="cm-keyword">in</span> use: radeon</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>Kernel modules: radeon</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 274px;"></div><div class="CodeMirror-gutters" style="display: none; height: 274px;"></div></div></div></pre><p>&nbsp;</p><p><strong><span>lsusb</span></strong><span>: muestra información sobre los buses y dispositivos usb conectados</span></p><p><code>-v, -vv, -s, -t</code><span>  igual que lspci muestra en arbol y velocidad del usb</span><code>-t</code></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">➜ lsusb <span class="cm-attribute">-t</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">/:  Bus <span class="cm-number">04</span>.Port <span class="cm-number">1</span>: Dev <span class="cm-number">1</span>, <span class="cm-def">Class</span><span class="cm-operator">=</span>root_hub, <span class="cm-def">Driver</span><span class="cm-operator">=</span>xhci_hcd/4p, 5000M</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">/:  Bus <span class="cm-number">03</span>.Port <span class="cm-number">1</span>: Dev <span class="cm-number">1</span>, <span class="cm-def">Class</span><span class="cm-operator">=</span>root_hub, <span class="cm-def">Driver</span><span class="cm-operator">=</span>xhci_hcd/4p, 480M</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">/:  Bus <span class="cm-number">02</span>.Port <span class="cm-number">1</span>: Dev <span class="cm-number">1</span>, <span class="cm-def">Class</span><span class="cm-operator">=</span>root_hub, <span class="cm-def">Driver</span><span class="cm-operator">=</span>xhci_hcd/4p, 10000M</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">/:  Bus <span class="cm-number">01</span>.Port <span class="cm-number">1</span>: Dev <span class="cm-number">1</span>, <span class="cm-def">Class</span><span class="cm-operator">=</span>root_hub, <span class="cm-def">Driver</span><span class="cm-operator">=</span>xhci_hcd/10p, 480M</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  |__ Port <span class="cm-number">6</span>: Dev <span class="cm-number">2</span>, If <span class="cm-number">0</span>, <span class="cm-def">Class</span><span class="cm-operator">=</span>Human Interface Device, <span class="cm-def">Driver</span><span class="cm-operator">=</span>usbhid, <span class="cm-number">1</span>.5M</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  |__ Port <span class="cm-number">7</span>: Dev <span class="cm-number">3</span>, If <span class="cm-number">0</span>, <span class="cm-def">Class</span><span class="cm-operator">=</span>Vendor Specific Class, <span class="cm-def">Driver</span><span class="cm-operator">=</span>rt2800usb, 480M</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 160px;"></div><div class="CodeMirror-gutters" style="display: none; height: 160px;"></div></div></div></pre><p>&nbsp;</p><h3><a name="modulos" class="md-header-anchor"></a><span>Modulos</span></h3><p><span>Los modulos son partes del kernel que podemos activar o desactivar para añadir o quitar funcionalidades. tiene una relación muy estrecha con los driver</span></p><p><span>Son archivos terminados con la extensión </span><code>.ko</code><span> que se almacenan en </span><code>/lib/modules/version_del_kernel/</code></p><p>&nbsp;</p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><span><span>​</span>x</span></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">lsmod<span class="cm-tab" role="presentation" cm-text="	">   </span><span class="cm-comment"># muestra moddulos cargados en el sistema</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">modinfo<span class="cm-tab" role="presentation" cm-text="	"> </span><span class="cm-comment"># aplia informacion del modulo</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">insmod<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-comment"># carga un fichero .ko en nel sistema</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">rmmod <span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-comment"># quita un modulo</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-attribute">-w</span><span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-comment"># espera a que deje de utilizarse</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-attribute">-f</span><span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-comment"># fuerza el borrado</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># actualizacion de los anteriores</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">modprobe <span class="cm-comment"># carga y resuelve dependencias</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-attribute">-f</span> <span class="cm-tab" role="presentation" cm-text="	"> </span><span class="cm-comment"># fuerza la carga del modulo aun que no sea la version correspondiente.</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-attribute">-r</span> &nbsp;<span class="cm-comment"># elimina modulo</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-attribute">-v</span> <span class="cm-tab" role="presentation" cm-text="	"> </span><span class="cm-comment"># muestra información adicional de lo que realiza</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-attribute">-n</span> <span class="cm-tab" role="presentation" cm-text="	"> </span><span class="cm-comment"># hace una simulación</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 296px;"></div><div class="CodeMirror-gutters" style="display: none; height: 296px;"></div></div></div></pre><p><span>Los modulos tienen opciones personalizables que podemos observar con </span><code>modinfo -p modulo</code><span>  para hacer estas opciones persistentes se crea un archivo de configuración en </span><code>/etc/modprobe.d/module-name.conf</code></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-def">$ cat</span> /etc/modprobe.d/mdadm.conf</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># mdadm module configuration file</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">options md_mod <span class="cm-def">start_ro</span><span class="cm-operator">=</span><span class="cm-number">1</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 68px;"></div><div class="CodeMirror-gutters" style="display: none; height: 68px;"></div></div></div></pre><p><span>Si un módulo está causando problemas, el archivo </span><code>/etc/modprobe.d/blacklist.conf</code><span> puede usarse para bloquear la carga del módulo. Por ejemplo, para evitar la carga automática del módulo </span><code>nouveau</code><span>, la línea </span><code>blacklist nouveau</code><span> debe agregarse al archivo </span><code>/etc/modprobe.d/blacklist.conf</code><span>.</span></p><p>&nbsp;</p><h2><a name="arranque-del-sistema" class="md-header-anchor"></a><span>Arranque del sistema</span></h2><p>&nbsp;</p><p><strong><span>BIOS</span></strong><span> Basic Input/Output System. Es un Firmware en ROM ( o PROM )</span></p><p><span>Su dos partes  fundamentales:</span></p><ul><li><span>Setup: Para configurar las opciones. </span></li><li><span>POST: Revisa que funcionen los componentes principales para poder arrancar.</span></li></ul><p>&nbsp;</p><p><strong><span>UEFI</span></strong><span> Unified Extensible Firmware Interface</span></p><ul><li><span>Compatibilidad y emulación del BIOS</span></li><li><span>Soporte para tabla de particiones GUID (GPT)</span></li><li><span>Capacidad de gestionar y arrancar desde unidades de almacenamiento grandes ( MBR no soporta más de 2 TB )</span></li><li><span>Entorno amigable y flexible, incluyendo capacidades de red.</span></li><li><span>Diseño modular</span></li><li><span>Opción de arranque seguro ( Secure Boot )</span></li></ul><p>&nbsp;</p><h3><a name="funcionamiento-del-arranque" class="md-header-anchor"></a><span>Funcionamiento del arranque</span></h3><ul><li><span>Al encender el PC se ejecuta el firmware de la BIOS o UEFI</span></li><li><span>El POST comprueba que el hardware básico esté bien</span></li><li><span>Se busca un cargador de arranque por orden en las unidades que hayamos indicado en la secuencia de arranque del setup</span></li><li><span>Si es BIOS se lee el primer sector de la unidad (MBR) donde se encuentra el código para buscar el gestor de arranque</span></li><li><span>Si es UEFI se ejecuta el gestor de arranque que se encuentra en una partición especial (ESP)</span></li></ul><p>&nbsp;</p><h3><a name="mbr-y-gpt" class="md-header-anchor"></a><span>MBR y GPT</span></h3><p><strong><span>MBR</span></strong><span> (Master boot record)</span></p><ul><li><p><span>se encuentra en el primer sector del disco</span></p></li><li><p><span>Contiene una tabla de solo 4 particiones primarias</span></p><ul><li><span>Primaria, extendida o lógica</span></li></ul></li><li><p><span>No es capaz de manejar particiones de más de 2TB</span></p></li></ul><p><strong><span>GPT</span></strong><span>  (GUID Partition Table)</span></p><ul><li><span>Es compatible con MBR</span></li><li><span>No funciona con BIOS, necesita EFI o UEFI</span></li><li><span>Soporta tamaños de disco de hasta 9,4 zettabytes</span></li><li><span>Puede gestionar todas las particiones que soporte el Sistema Operativo ( normalmente 128)</span></li><li><span>Gestiona mejor el arranque del S.O.</span></li></ul><p>&nbsp;</p><h3><a name="proceso-de-inicio" class="md-header-anchor"></a><span>Proceso de inicio</span></h3><ul><li><span>BIOS &gt; MBR &gt; lilo/grub/grub2   o   UEFI &gt; lilo/grub/grub2</span></li><li><span>Arranque del kernel</span></li><li><span>inicio de Init, proceso numero 1 que es el primero en una larga lista de demonios etc...</span></li></ul><p>&nbsp;</p><p><span>Podemos encontrar tres tipos de procesos encargados de iniciar y gestionar los servicios o demonios de entorno Linux:</span></p><p><strong><span>SysVinit</span></strong><span> Un administrador de servicios basado en el estándar SysVinit controla  qué demonios y recursos estarán disponibles empleando el concepto de </span><em><span>runlevels</span></em><span> </span></p><p><strong><span>Systemd</span></strong><span> Desde 2015, las principales distribuciones lo han adoptado como su sistema de inicio. Agrupa los servicios en </span><code>target</code><span> en lugar de runlevel, estableciendo en ellos dependencias y el orden de ejecución de los procesos.</span></p><p><strong><span>Upstar</span></strong><span> Utiliza eventos para gestionar el arranque o parada de los procesos.</span></p><p>&nbsp;</p><h4><a name="sysvinit" class="md-header-anchor"></a><span>SysVinit</span></h4><ul><li><span>El fichero </span><code>/etc/inittab</code><span> tiene la configuración básica como el nivel de ejecución por defecto y las acciones a tomar en determinadas situaciones.</span></li><li><span>Se definen niveles de ejecución y qué se hará en cada uno de ellos en el directorio </span><code>/etc/rcN.d</code><span>  </span><code>N</code><span> es el número de ejecución, este directorio directorio esta formado por difrentes archivos de dominios los cuales muchos sonm enlaces a </span><code>/etc/init.d</code><span> que es donde se encuentran los dominios.</span></li><li><strong><span>rc</span></strong><span> ejecuta los ficheros que hay en el directorio </span><code>/etc/rcN.d/</code><span> por orden numérico (siendo </span><strong><span>N</span></strong><span> el nivel de ejecución). Estos ficheros serán enlaces que empiezan por </span><strong><span>S</span></strong><span> o </span><strong><span>K</span></strong><span> y que apuntan a script que están en </span><code>/etc/init.d/</code></li><li><span>Si el enlace empieza por </span><strong><span>S, rc</span></strong><span> le pasará el comando </span><strong><span>start</span></strong><span> y si empieza por </span><strong><span>K</span></strong><span> le pasará </span><strong><span>stop</span></strong></li></ul><p>&nbsp;</p><p><span>comandos</span></p><ul><li><strong><span>runlevel</span></strong><span> indica el nivel de ejecucion actual</span></li><li><strong><span>init o telinit</span></strong><span> cambia de un nivel de ejecución a otro</span></li><li><strong><span>update-rc.d</span></strong><span> establece los script que se inician en cada nivel.</span></li></ul><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded md-focus" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap CodeMirror-focused" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 136.8px; left: 309.994px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre>x</pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="" style="position: relative;"><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># sintaxis: update-rc.d  script enable/disable  level/s</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">update-rc.d  mi-servicio enable <span class="cm-number">2</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><div class="" style="position: relative;"><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">telinit </span></pre></div><div class="" style="position: relative;"><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;<span class="cm-number">1</span>, s, S<span class="cm-tab" role="presentation" cm-text="	">   </span><span class="cm-comment"># Entrar modo rescate</span></span></pre></div><div class="" style="position: relative;"><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  q, Q &nbsp; &nbsp; &nbsp;<span class="cm-comment"># recargar configuración del demonio /etc/inttab </span></span></pre></div><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">  u, U &nbsp; &nbsp; &nbsp;<span class="cm-comment"># reejecutar el demonio</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 160px;"></div><div class="CodeMirror-gutters" style="display: none; height: 160px;"></div></div></div></pre><p>&nbsp;</p><h4><a name="systemd" class="md-header-anchor"></a><span>Systemd</span></h4><ul><li><span>Se ejecuta un único programa que utilizará ficheros de configuración para cada servicio a gestionar</span></li><li><span>utiliza </span><strong><span>unidades</span></strong><span> que pueden ser de diversos tipos: automont, devices, mount, path, service, snapshot, socket y target.</span></li><li><span>Los services se agrupan en target, donde también podemos definir el orden de ejecución y las dependencias con otros target o services. Son los equivalentes a los runlevels en SysVinit</span></li><li><span>Cada unidad se define en un fichero con el nombre de dicha unidad y en la extensión se indica el tipo de unidad, por ejemplo </span><strong><span>ssh.service</span></strong><span> </span></li><li><span>Estos ficheros pueden estar en distintos directorios como: </span><code>/usr/lib/systemd/system/</code><span>, </span><code>/lib/systemd/system/</code><span> o </span><code>/etc/systemd/system/</code></li></ul><figure><table><thead><tr><th><span>unidad</span></th><th><span>descripcion</span></th></tr></thead><tbody><tr><td><span>service</span></td><td><span>El tipo de unidad más común, para recursos activos del sistema que se pueden iniciar, interrumpir y recargar.</span></td></tr><tr><td><span>socket</span></td><td><span>El tipo de unidad de socket puede ser un socket de sistema de archivos o un socket de red. Todas las unidades de socket tienen una unidad de  servicio correspondiente, cargada cuando el socket recibe una solicitud.</span></td></tr><tr><td><span>device</span></td><td><span>Una unidad de dispositivo está asociada con un dispositivo de hardware identificado por el núcleo.</span></td></tr><tr><td><span>mount</span></td><td><span>Una unidad de montaje es una definición de punto de montaje en el sistema de archivos, similar a una entrada en </span><code>/etc/fstab</code><span>.</span></td></tr><tr><td><span>automount</span></td><td><span>Una unidad de montaje automático también es una definición de punto de  montaje en el sistema de archivos, pero se monta automáticamente.</span></td></tr><tr><td><span>target</span></td><td><span>Una unidad target es una agrupación de otras unidades, administradas como una sola unidad.</span></td></tr><tr><td><span>snapshot</span></td><td><span>Una unidad snapshot es un estado guardado del administrador del sistema (no disponible en todas las distribuciones de Linux).</span></td></tr></tbody></table></figure><p><span>comandos</span></p><p><strong><span>systemctl</span></strong><span>: gestiona la gran mayoría de aspectos en systemd</span></p><ul><li><strong><span>get-default</span></strong><span>: indica el target por defecto</span></li><li><strong><span>start/stop/status</span></strong><span>/etc..  unit[.service]: </span><code>systemctl restart apache2</code></li><li><strong><span>isolate</span></strong><span> unit.target : cambia al target seleccionado</span></li><li><strong><span>list-units</span></strong><span> [--type=service] : lista las unidades cargadas</span></li><li><strong><span>enable/disable</span></strong><span>: activa o desactiva una unidad</span></li><li><strong><span>cat</span></strong><span> muestra el fichero de la unidad</span></li><li><strong><span>list-dependencies</span></strong><span>: muestra un árbol de dependencias de una unidad</span></li></ul><p>&nbsp;</p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash" style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># ver nivel de ejecución por defecto</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">systemctl get-default</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># asignar nivel por defecto</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">systemctl set-default graphical.target</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># gestion de servicios</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">systemctl <span class="cm-builtin">start</span>/stop/status/enable/disable <span class="cm-builtin">ssh</span>.service</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># visualizar archivo de servicio</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">systemctl <span class="cm-builtin">cat</span> <span class="cm-builtin">ssh</span>.service</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># cambiar de nivel de ejecucion</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">systemctl isolate rescue.target/multi-user.target/graphical.target</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># listar dependencias</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">systemctl list-dependencies</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">systemctl list-dependencies <span class="cm-builtin">ssh</span>.service</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># listar units</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">systemctl list-units <span class="cm-attribute">--type</span><span class="cm-operator">=</span><span class="cm-builtin">service</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">systemctl list-unit-files</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> <span class="cm-comment"># analizar los tiempos de arranque</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> systemd-analyce blame</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 570px;"></div><div class="CodeMirror-gutters" style="display: none; height: 570px;"></div></div></div></pre><p>&nbsp;</p><h4><a name="upstart" class="md-header-anchor"></a><span>Upstart</span></h4><p><span>Los scripts de inicialización utilizados por Upstart se encuentran en el directorio </span><code>/etc/init/</code><span>. Los servicios del sistema se pueden enumerar con el comando </span><code>initctl list</code><span>, que también muestra el estado actual de los servicios y, si está disponible, su número PID.</span></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># initctl list</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">avahi-cups-reload <span class="cm-builtin">stop</span>/waiting</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">avahi-daemon <span class="cm-builtin">start</span>/running, process <span class="cm-number">1123</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">mountall-net <span class="cm-builtin">stop</span>/waiting</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">...</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 114px;"></div><div class="CodeMirror-gutters" style="display: none; height: 114px;"></div></div></div></pre><p><span>Cada acción de Upstart tiene su propio comando independiente. </span></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># start tty6</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># status tty6</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">tty6 <span class="cm-builtin">start</span>/running, process <span class="cm-number">3282</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># stop tty6</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 137px;"></div><div class="CodeMirror-gutters" style="display: none; height: 137px;"></div></div></div></pre><p><span>Upstart no usa el archivo </span><code>/etc/inittab</code><span> para definir los niveles de ejecución, pero los comandos heredados </span><code>runlevel</code><span> y </span><code>telinit</code><span> todavía pueden usarse para verificar y alternar entre los niveles de ejecución.</span></p><blockquote><p><span>Upstart fue desarrollado para la distribución Ubuntu Linux para ayudar a facilitar el inicio paralelo de los procesos. Ubuntu ha dejado de usar  Upstart desde 2015 cuando cambió de Upstart a systemd.</span></p></blockquote><p>&nbsp;</p><p>&nbsp;</p><h4><a name="logs-del-sistema" class="md-header-anchor"></a><span>Logs del sistema</span></h4><h5><a name="journalctl" class="md-header-anchor"></a><span>journalctl</span></h5><p><span>Es la manera que tiene Systemctl de consultar los logs del sistema</span></p><ul><li><p><strong><span>-S -U</span></strong><span>: permite especificar desde (since) y/o  hasta cuando (until)</span></p><ul><li><span>YYYY-MM-DD [ HH:MM:SS], yesterday, today, tomorrow, N day ago, - / + NhMmin (-1h15min)</span></li></ul></li><li><p><strong><span>-u</span></strong><span> unit: mensage de una unidad en concreto</span></p></li><li><p><strong><span>-k</span></strong><span> : mensajes del kernel</span></p></li><li><p><strong><span>-p</span></strong><span> por tipo ( emerg, alert, crit, err, warning, notice, info, debug )</span></p></li><li><p><span>PARAM=VALUE : parametros como </span><code>_PID, _UID, _COMM</code><span>  ( man systemd.journal-fields )</span></p></li><li><p><strong><span>-D --directory</span></strong><span> leer un archivo de log de journal</span></p></li></ul><p>&nbsp;</p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash" style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">sudo</span> journalctl</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># filtrar entre dias, o horas</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">sudo</span> journalctl <span class="cm-attribute">-S</span> <span class="cm-number">2021</span><span class="cm-attribute">-02-14</span> <span class="cm-attribute">-U</span> <span class="cm-number">2021</span><span class="cm-attribute">-02-16</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">sudo</span> journalctl <span class="cm-attribute">-S</span> today</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">sudo</span> journalctl <span class="cm-attribute">-S</span> yesterday</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">sudo</span> journalctl <span class="cm-attribute">-S</span> <span class="cm-string">'2 day ago'</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">sudo</span> journalctl <span class="cm-attribute">-S</span> <span class="cm-attribute">-1h10min</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># filtrar por servicio</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">sudo</span> journalctl <span class="cm-attribute">-u</span> networking.service</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># logs del kernel</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">sudo</span> journalctl <span class="cm-attribute">-k</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># filtrar po tipo de alerta</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">sudo</span> journalctl <span class="cm-attribute">-p</span> err</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">sudo</span> journalctl <span class="cm-attribute">-p</span> warning</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">sudo</span> journalctl <span class="cm-attribute">-p</span> emerg</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">sudo</span> journalctl <span class="cm-attribute">-p</span> alert</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">sudo</span> journalctl <span class="cm-attribute">-p</span> info</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># filtrar por parametro</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">sudo</span> journalctl <span class="cm-def">_COMM</span><span class="cm-operator">=</span>anacron</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">sudo</span> journalctl <span class="cm-def">_UID</span><span class="cm-operator">=</span><span class="cm-number">1000</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># filtrar los ultimos logs, con una corta esplicación</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">sudo</span> journalctl <span class="cm-attribute">-xe</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># leer logs de un directorio alternativo</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">sudo</span> journalctl <span class="cm-attribute">--directory</span> /mnt/var/log/journal</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 707px;"></div><div class="CodeMirror-gutters" style="display: none; height: 707px;"></div></div></div></pre><p>&nbsp;</p><h5><a name="dmesg" class="md-header-anchor"></a><span>dmesg</span></h5><p><span>Al arrancar el sistema se muestran mensajes según se van cargando controladores o funciones del sistema. para revisarlos se usa </span><strong><span>dmesg</span></strong></p><ul><li><strong><span>-T</span></strong><span> Muestra las marcas de tiempo mas claramente</span></li><li><strong><span>-k</span></strong><span> solo mensajes del kernel</span></li><li><strong><span>-l</span></strong><span> filtra por niveles  de aviso ( warn, err, etc...)</span></li><li><strong><span>-H</span></strong><span>  salida para lectura humana, es equivalnte a </span><code>dmesg | less</code></li></ul><p><span>Este comando es equivalente a </span><code>journalctl -b -k</code></p><p>&nbsp;</p><h4><a name="initramfs" class="md-header-anchor"></a><span>Initramfs</span></h4><p><span>Initramfs ( initial ram file system)</span></p><p><span>Es el sistema de archivos ram inicial (ramdisk). Es un archivo comprimido normalmente en formato gzip que contiene un pequeño </span><strong><span>sistema de archivos que se cargará en la memoria RAM en el proceso de arranque</span></strong><span> del núcleo.</span></p><p><span>El kernel lo necesita para completar tareas relacionadas con módulos y controladores de dispositivos antes de poder arrancar el verdadero sistema de archivos raíz instalado en el disco duro e invocar al proceso init.</span></p><p><span>En el fichero de configuración del GRUB figura una linea como esta:</span>
+<code>initrd	/boot/initrd.img-4.19.0-14-amd64</code></p><p>&nbsp;</p><h4><a name="proccmdline" class="md-header-anchor"></a><span>/proc/cmdline</span></h4><p><span>En este archivo se registran los argumentos que sde le han añadido al kernel en el arranque, así que se puede describir como log.</span></p><p>&nbsp;</p><h2><a name="apagado-del-sistema" class="md-header-anchor"></a><span>Apagado del sistema</span></h2><p><span>Desde el terminal tenemos diferentes opciones para el apagado del sistema.</span></p><ul><li><strong><span>shutdown</span></strong><span>: apaga el sistema de forma planificada</span></li><li><strong><span>halt</span></strong><span>: apaga el sistema sin enviar señal ACPI de apagado  de alimntación electrica</span></li><li><strong><span>poweroff</span></strong><span>: apaga el sistema con señal ACPI</span></li><li><strong><span>reboot</span></strong><span>: reinicia el sistema</span></li></ul><p>&nbsp;</p><figure><table><thead><tr><th><span>Reiniciar</span></th><th><span>reboot</span></th><th><span>shutdown -r</span></th><th><span>halt --reboot</span></th></tr></thead><tbody><tr><td><span>Cerrar sistema</span></td><td><span>halt</span></td><td><span>shutdown -H</span></td><td><span>reboot --halt</span></td></tr><tr><td><span>Apagar</span></td><td><span>poweroff</span></td><td><span>shutdown -P</span></td><td><span>halt -p</span></td></tr></tbody></table></figure><p><span>Aún que hay diferentes comandos para gestional el apagado, en realidad todos son enlaces a systemctl con diferentes opciones a pasar.</span></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">➜  ~ ll /sbin/* | <span class="cm-builtin">grep</span> systemctl</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">lrwxrwxrwx <span class="cm-number">1</span> root root &nbsp; &nbsp; <span class="cm-number">14</span> ene <span class="cm-number">29</span> <span class="cm-number">15</span>:16 /sbin/halt <span class="cm-attribute">-</span>&gt; /bin/systemctl</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">lrwxrwxrwx <span class="cm-number">1</span> root root &nbsp; &nbsp; <span class="cm-number">14</span> ene <span class="cm-number">29</span> <span class="cm-number">15</span>:16 /sbin/poweroff <span class="cm-attribute">-</span>&gt; /bin/systemctl</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">lrwxrwxrwx <span class="cm-number">1</span> root root &nbsp; &nbsp; <span class="cm-number">14</span> ene <span class="cm-number">29</span> <span class="cm-number">15</span>:16 /sbin/reboot <span class="cm-attribute">-</span>&gt; /bin/systemctl</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">lrwxrwxrwx <span class="cm-number">1</span> root root &nbsp; &nbsp; <span class="cm-number">14</span> ene <span class="cm-number">29</span> <span class="cm-number">15</span>:16 /sbin/runlevel <span class="cm-attribute">-</span>&gt; /bin/systemctl</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">lrwxrwxrwx <span class="cm-number">1</span> root root &nbsp; &nbsp; <span class="cm-number">14</span> ene <span class="cm-number">29</span> <span class="cm-number">15</span>:16 /sbin/shutdown <span class="cm-attribute">-</span>&gt; /bin/systemctl</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">lrwxrwxrwx <span class="cm-number">1</span> root root &nbsp; &nbsp; <span class="cm-number">14</span> ene <span class="cm-number">29</span> <span class="cm-number">15</span>:16 /sbin/telinit <span class="cm-attribute">-</span>&gt; /bin/systemctl</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 160px;"></div><div class="CodeMirror-gutters" style="display: none; height: 160px;"></div></div></div></pre><p>&nbsp;</p><p><strong><span>shutdown</span></strong><span> [opcion] TIEMPO [mensaje]</span></p><p><span>El tiempo se puede expresar en horas y minutos (</span><strong><span>HH:MM</span></strong><span>), en minutos que faltan para el apagado: </span><strong><span>+M</span></strong><span>  o con la palabra </span><strong><span>now</span></strong></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">shutdown <span class="cm-operator">+</span><span class="cm-number">5</span> <span class="cm-string">"El  sistema se apagara en 5 minutos"</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">shutdown <span class="cm-attribute">-c</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 46px;"></div><div class="CodeMirror-gutters" style="display: none; height: 46px;"></div></div></div></pre><p>&nbsp;</p><h3><a name="mensajes" class="md-header-anchor"></a><span>Mensajes</span></h3><p><span>En ocasiones puede que esten varios usuarios conectados a un servidor y el reinicio o apagado del mismo se tiene que avisar para no entorpecer la faena del compañero, en ese caso se envian mensajes con </span><code>wall</code><span> </span></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">wall</span> <span class="cm-string">"Recordatorio que el servidor se apagará en 5 minutos"</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 23px;"></div><div class="CodeMirror-gutters" style="display: none; height: 23px;"></div></div></div></pre><p><strong><span>mesg</span></strong><span> gestiona la admision de recepcion de mensajes: y (si) n (no), esto solo es valorable con mensajes de otros usuarios, ya que si root envia un mensaje se recibira de todas formas.  </span></p><p>&nbsp;</p></div>
+</body>
+</html>

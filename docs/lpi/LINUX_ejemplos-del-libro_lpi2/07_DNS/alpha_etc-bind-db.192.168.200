@@ -1,0 +1,13 @@
+$TTL    86400 
+200.168.192.in-addr.arpa.   IN  SOA     alfa.pas.net. root.pas.net. ( 
+        2 
+        604800 
+        86400 
+        2419200 
+        86400 ) 
+
+200.168.192.in-addr.arpa.	IN   NS	alfa.pas.net.
+200.168.192.in-addr.arpa.       IN      NS      beta.pas.net.
+101		IN   PTR	alfa.pas.net. 
+102		IN   PTR	beta.pas.net.
+212             IN      PTR     cliente.pas.net.

@@ -1,0 +1,626 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>102_Instalacion_de_Linux_y_gestion_de_paquetes</title><link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; --title-bar-height:20px; }
+.mac-os-11 { --title-bar-height:28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.html-for-mac .inline-math-svg .MathJax_SVG { vertical-align: 0.2px; }
+.md-math-block .MathJax_SVG_Display { text-align: center; margin: 0px; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; overflow-y: hidden; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: var(--monospace); }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; overflow-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none 0s ease 0s; }
+.MathJax_SVG_Display svg { vertical-align: middle !important; margin-bottom: 0px !important; margin-top: 0px !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+mark .md-meta { color: rgb(0, 0, 0); opacity: 0.3 !important; }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-require-zoom-fix foreignobject { font-size: var(--mermaid-font-zoom); }
+
+
+.CodeMirror { height: auto; }
+.CodeMirror.cm-s-inner { background: inherit; }
+.CodeMirror-scroll { overflow: auto hidden; z-index: 3; }
+.CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler { background-color: rgb(255, 255, 255); }
+.CodeMirror-gutters { border-right: 1px solid rgb(221, 221, 221); background: inherit; white-space: nowrap; }
+.CodeMirror-linenumber { padding: 0px 3px 0px 5px; text-align: right; color: rgb(153, 153, 153); }
+.cm-s-inner .cm-keyword { color: rgb(119, 0, 136); }
+.cm-s-inner .cm-atom, .cm-s-inner.cm-atom { color: rgb(34, 17, 153); }
+.cm-s-inner .cm-number { color: rgb(17, 102, 68); }
+.cm-s-inner .cm-def { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-variable { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-variable-2 { color: rgb(0, 85, 170); }
+.cm-s-inner .cm-variable-3 { color: rgb(0, 136, 85); }
+.cm-s-inner .cm-string { color: rgb(170, 17, 17); }
+.cm-s-inner .cm-property { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-operator { color: rgb(152, 26, 26); }
+.cm-s-inner .cm-comment, .cm-s-inner.cm-comment { color: rgb(170, 85, 0); }
+.cm-s-inner .cm-string-2 { color: rgb(255, 85, 0); }
+.cm-s-inner .cm-meta { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-qualifier { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-builtin { color: rgb(51, 0, 170); }
+.cm-s-inner .cm-bracket { color: rgb(153, 153, 119); }
+.cm-s-inner .cm-tag { color: rgb(17, 119, 0); }
+.cm-s-inner .cm-attribute { color: rgb(0, 0, 204); }
+.cm-s-inner .cm-header, .cm-s-inner.cm-header { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-quote, .cm-s-inner.cm-quote { color: rgb(0, 153, 0); }
+.cm-s-inner .cm-hr, .cm-s-inner.cm-hr { color: rgb(153, 153, 153); }
+.cm-s-inner .cm-link, .cm-s-inner.cm-link { color: rgb(0, 0, 204); }
+.cm-negative { color: rgb(221, 68, 68); }
+.cm-positive { color: rgb(34, 153, 34); }
+.cm-header, .cm-strong { font-weight: 700; }
+.cm-del { text-decoration: line-through; }
+.cm-em { font-style: italic; }
+.cm-link { text-decoration: underline; }
+.cm-error { color: red; }
+.cm-invalidchar { color: red; }
+.cm-constant { color: rgb(38, 139, 210); }
+.cm-defined { color: rgb(181, 137, 0); }
+div.CodeMirror span.CodeMirror-matchingbracket { color: rgb(0, 255, 0); }
+div.CodeMirror span.CodeMirror-nonmatchingbracket { color: rgb(255, 34, 34); }
+.cm-s-inner .CodeMirror-activeline-background { background: inherit; }
+.CodeMirror { position: relative; overflow: hidden; }
+.CodeMirror-scroll { height: 100%; outline: 0px; position: relative; box-sizing: content-box; background: inherit; }
+.CodeMirror-sizer { position: relative; }
+.CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar { position: absolute; z-index: 6; display: none; }
+.CodeMirror-vscrollbar { right: 0px; top: 0px; overflow: hidden; }
+.CodeMirror-hscrollbar { bottom: 0px; left: 0px; overflow: hidden; }
+.CodeMirror-scrollbar-filler { right: 0px; bottom: 0px; }
+.CodeMirror-gutter-filler { left: 0px; bottom: 0px; }
+.CodeMirror-gutters { position: absolute; left: 0px; top: 0px; padding-bottom: 30px; z-index: 3; }
+.CodeMirror-gutter { white-space: normal; height: 100%; box-sizing: content-box; padding-bottom: 30px; margin-bottom: -32px; display: inline-block; }
+.CodeMirror-gutter-wrapper { position: absolute; z-index: 4; background: 0px 0px !important; border: none !important; }
+.CodeMirror-gutter-background { position: absolute; top: 0px; bottom: 0px; z-index: 4; }
+.CodeMirror-gutter-elt { position: absolute; cursor: default; z-index: 4; }
+.CodeMirror-lines { cursor: text; }
+.CodeMirror pre { border-radius: 0px; border-width: 0px; background: 0px 0px; font-family: inherit; font-size: inherit; margin: 0px; white-space: pre; overflow-wrap: normal; color: inherit; z-index: 2; position: relative; overflow: visible; }
+.CodeMirror-wrap pre { overflow-wrap: break-word; white-space: pre-wrap; word-break: normal; }
+.CodeMirror-code pre { border-right: 30px solid transparent; width: fit-content; }
+.CodeMirror-wrap .CodeMirror-code pre { border-right: none; width: auto; }
+.CodeMirror-linebackground { position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px; z-index: 0; }
+.CodeMirror-linewidget { position: relative; z-index: 2; overflow: auto; }
+.CodeMirror-wrap .CodeMirror-scroll { overflow-x: hidden; }
+.CodeMirror-measure { position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden; }
+.CodeMirror-measure pre { position: static; }
+.CodeMirror div.CodeMirror-cursor { position: absolute; visibility: hidden; border-right: none; width: 0px; }
+.CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+.CodeMirror-focused div.CodeMirror-cursor { visibility: inherit; }
+.cm-searching { background: rgba(255, 255, 0, 0.4); }
+@media print {
+  .CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+}
+
+
+:root {
+    --side-bar-bg-color: #fafafa;
+    --control-text-color: #777;
+}
+
+@include-when-export url(https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext);
+
+/* open-sans-regular - latin-ext_latin */
+  /* open-sans-italic - latin-ext_latin */
+    /* open-sans-700 - latin-ext_latin */
+    /* open-sans-700italic - latin-ext_latin */
+  html {
+    font-size: 16px;
+}
+
+body {
+    font-family: "Open Sans","Clear Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: rgb(51, 51, 51);
+    line-height: 1.6;
+}
+
+#write {
+    max-width: 860px;
+  	margin: 0 auto;
+  	padding: 30px;
+    padding-bottom: 100px;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+		max-width: 1024px;
+	}
+}
+
+@media only screen and (min-width: 1800px) {
+	#write {
+		max-width: 1200px;
+	}
+}
+
+#write > ul:first-child,
+#write > ol:first-child{
+    margin-top: 30px;
+}
+
+a {
+    color: #4183C4;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+}
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+    text-decoration: none;
+}
+h1 tt,
+h1 code {
+    font-size: inherit;
+}
+h2 tt,
+h2 code {
+    font-size: inherit;
+}
+h3 tt,
+h3 code {
+    font-size: inherit;
+}
+h4 tt,
+h4 code {
+    font-size: inherit;
+}
+h5 tt,
+h5 code {
+    font-size: inherit;
+}
+h6 tt,
+h6 code {
+    font-size: inherit;
+}
+h1 {
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+}
+h2 {
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+}
+
+/*@media print {
+    .typora-export h1,
+    .typora-export h2 {
+        border-bottom: none;
+        padding-bottom: initial;
+    }
+
+    .typora-export h1::after,
+    .typora-export h2::after {
+        content: "";
+        display: block;
+        height: 100px;
+        margin-top: -96px;
+        border-top: 1px solid #eee;
+    }
+}*/
+
+h3 {
+    font-size: 1.5em;
+    line-height: 1.43;
+}
+h4 {
+    font-size: 1.25em;
+}
+h5 {
+    font-size: 1em;
+}
+h6 {
+   font-size: 1em;
+    color: #777;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table{
+    margin: 0.8em 0;
+}
+li>ol,
+li>ul {
+    margin: 0 0;
+}
+hr {
+    height: 2px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+li p.first {
+    display: inline-block;
+}
+ul,
+ol {
+    padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+    margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+    margin-bottom: 0;
+}
+blockquote {
+    border-left: 4px solid #dfe2e5;
+    padding: 0 15px;
+    color: #777777;
+}
+blockquote blockquote {
+    padding-right: 0;
+}
+table {
+    padding: 0;
+    word-break: initial;
+}
+table tr {
+    border-top: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+table th {
+    font-weight: bold;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+table td {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+table th:first-child,
+table td:first-child {
+    margin-top: 0;
+}
+table th:last-child,
+table td:last-child {
+    margin-bottom: 0;
+}
+
+.CodeMirror-lines {
+    padding-left: 4px;
+}
+
+.code-tooltip {
+    box-shadow: 0 1px 1px 0 rgba(0,28,36,.3);
+    border-top: 1px solid #eef2f2;
+}
+
+.md-fences,
+code,
+tt {
+    border: 1px solid #e7eaed;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    padding: 0;
+    padding: 2px 4px 0px 4px;
+    font-size: 0.9em;
+}
+
+code {
+    background-color: #f3f4f4;
+    padding: 0 2px 0 2px;
+}
+
+.md-fences {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
+
+
+.md-task-list-item > input {
+  margin-left: -1.3em;
+}
+
+@media print {
+    html {
+        font-size: 13px;
+    }
+    table,
+    pre {
+        page-break-inside: avoid;
+    }
+    pre {
+        word-wrap: break-word;
+    }
+}
+
+.md-fences {
+	background-color: #f8f8f8;
+}
+#write pre.md-meta-block {
+	padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    border-radius: 3px;
+    color: #777777;
+    margin-top: 0 !important;
+}
+
+.mathjax-block>.code-tooltip {
+	bottom: .375rem;
+}
+
+.md-mathjax-midline {
+    background: #fafafa;
+}
+
+#write>h3.md-focus:before{
+	left: -1.5625rem;
+	top: .375rem;
+}
+#write>h4.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h5.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h6.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+.md-image>.md-meta {
+    /*border: 1px solid #ddd;*/
+    border-radius: 3px;
+    padding: 2px 0px 0px 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
+
+.md-tag {
+    color: #a7a7a7;
+    opacity: 1;
+}
+
+.md-toc { 
+    margin-top:20px;
+    padding-bottom:20px;
+}
+
+.sidebar-tabs {
+    border-bottom: none;
+}
+
+#typora-quick-open {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+
+#typora-quick-open-item {
+    background-color: #FAFAFA;
+    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+    border-style: solid;
+    border-width: 1px;
+}
+
+/** focus mode */
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header, .context-menu, .megamenu-content, footer{
+    font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state{
+    visibility: visible;
+}
+
+.mac-seamless-mode #typora-sidebar {
+    background-color: #fafafa;
+    background-color: var(--side-bar-bg-color);
+}
+
+.md-lang {
+    color: #b4654d;
+}
+
+.html-for-mac .context-menu {
+    --item-hover-bg-color: #E6F0FE;
+}
+
+#md-notification .btn {
+    border: 0;
+}
+
+.dropdown-menu .divider {
+    border-color: #e5e5e5;
+}
+
+.ty-preferences .window-content {
+    background-color: #fafafa;
+}
+
+.ty-preferences .nav-group-item.active {
+    color: white;
+    background: #999;
+}
+
+ .typora-export li, .typora-export p, .typora-export,  .footnote-line {white-space: normal;} 
+</style>
+</head>
+<body class='typora-export'>
+<div id='write'  class=''><h1><a name="102-instalación-de-linux-y-gestión-de-paquetes" class="md-header-anchor"></a><span>102 Instalación de Linux y gestión de paquetes</span></h1><p>&nbsp;</p><h2><a name="particionado-del-disco" class="md-header-anchor"></a><span>Particionado del disco</span></h2><p><span>En Linux se suele particionar algunos directorios del sistema, por seguridad o por funcionalidad de algunas tareas, como por ejemplo backups, redimensionamiento de discos, etc...</span></p><p><span>Los directorios más habituales a separar en diferentes particiones son </span><code>/, /boot, /home, /var</code></p><h3><a name="swap" class="md-header-anchor"></a><span>Swap</span></h3><p><span>El funcionamiento de la partición swap consiste en impedir que el ordenador se bloquee facilitando un espacio extra  a la ram. </span></p><p><span>Una vez la ram se queda sin espacio o está prácticamente llena   utiliza el swap una partición del disco dedicada para insertar los  procesos que cree ella menos importantes y en desuso.</span></p><p><span>El tamaño de la partición de swap depende mucho del administrador de sistemas y del tipo de equipo.</span></p><p><span>Que hay que tener en cuenta:</span></p><ul><li><span>Si el equipo  va a hibernar</span></li><li><span>cantidad de ram que dispone el equipo</span></li></ul><p><span>Por lo general poner más de 4 GB de Swap no es rentable, pero si el equipo va a hivernar y es un equipo con mucha RAM igual puede ser factible. </span></p><p><span>La norma general es poner la mitad de GB que RAM tiene tu sistema, aún que es cierto que leer más de 2-4 GB de  datos en disco destinados a RAM tarda una barvaridad.</span></p><p>&nbsp;</p><h3><a name="directorios" class="md-header-anchor"></a><span>Directorios</span></h3><p><span>Los directorios de inux siguen el estandar de jerarquía del sistema de archivos ( o FHS Filesistem Hierarchy Standard )</span></p><figure><table><thead><tr><th><span>Directorio</span></th><th><span>Descripción Simple</span></th></tr></thead><tbody><tr><td><span>/</span></td><td><span>la raíz o root, o contenedor de todo el sistema de jerarquía.</span></td></tr><tr><td><span>/bin/</span></td><td><span>Aplicaciones binarias</span></td></tr><tr><td><span>/boot/</span></td><td><span>Archivos cargadores de arranque</span></td></tr><tr><td><span>/dev/</span></td><td><span>Contiene archivos especiales asociados a dispositivos hardware.</span></td></tr><tr><td><span>/etc/</span></td><td><span>Contiene archivos de configuración del sistema</span></td></tr><tr><td><span>/home/</span></td><td><span>Contiene los directorios de trabajo de los usuarios</span></td></tr><tr><td><span>/lib/</span></td><td><span>Contiene todas las bibliotecas</span></td></tr><tr><td><span>/media/</span></td><td><span>Contiene los puntos de montaje de los medios extraíbles</span></td></tr><tr><td><span>/mnt/</span></td><td><span>Sistema de archivos montados temporalmente.</span></td></tr><tr><td><span>/opt/</span></td><td><span>Contiene Paquetes de programas opcionales de aplicaciones</span></td></tr><tr><td><span>/proc/</span></td><td><span>sistema de archivos virtuales que documentan al núcleo</span></td></tr><tr><td><span>/root/</span></td><td><span>Directorio raíz del usuario root.</span></td></tr><tr><td><span>/sbin/</span></td><td><span>Sistema de binarios esencial, comandos y programas</span></td></tr><tr><td><span>/srv/</span></td><td><span>Lugar específico de datos que son servidos por el sistema.</span></td></tr><tr><td><span>/sys/</span></td><td><span>Evolución de proc. Sistema de archivos virtuales que documentan al núcleo pero de forma jerarquizada.</span></td></tr><tr><td><span>/tmp/</span></td><td><span>Archivos temporales</span></td></tr><tr><td><span>/usr/</span></td><td><span>Jerarquía secundaria de los datos de usuario; contiene la mayoría de las utilidades y aplicaciones multiusuario</span></td></tr><tr><td><span>/var/</span></td><td><span>Archivos variables, tales como logs, archivos spool, bases de datos, archivos de e-mail temporales, y algunos archivos temporales en general.</span></td></tr><tr><td><span>/run/</span></td><td><span>Datos variables en tiempo de ejecución.</span></td></tr></tbody></table></figure><p>&nbsp;</p><p><strong><span>Directorios separables</span></strong></p><ul><li><p><strong><span>/boot</span></strong><span>: se tiene que separar si usamos LVM.Ext (250MB)</span></p></li><li><p><strong><span>/boot/efi</span></strong><span>: Particion ESP para UEFI. FAT (150MB)</span></p></li><li><p><span>sistemas multiusuario</span></p><ul><li><strong><span>/var</span></strong></li><li><strong><span>/home</span></strong></li></ul></li><li><p><strong><span>/usr</span></strong><span>: Si se van a instalar muchos programas que no son parte del sistema</span></p></li></ul><figure><table><thead><tr><th>&nbsp;</th><th><span>compartibles</span></th><th><span>no compartible</span></th></tr></thead><tbody><tr><td><strong><span>static</span></strong></td><td><span>/usr  /opt</span></td><td><span>/etc  /boot</span></td></tr><tr><td><strong><span>variable</span></strong></td><td><span>/var/mail   /var/spool/news</span></td><td><span>/var/run   /var/lock</span></td></tr></tbody></table></figure><h3><a name="lvm" class="md-header-anchor"></a><span>LVM</span></h3><p><span>Es un administrador de volúmenes lógicos, gracias a sus vgrupos y volúmenes lógicos tiene la caracteristica de poder crear una partición entre varios discos físicos. Esto es muy util a la hora de aumentar una partición cuando te has quedado sin espacio en un disco físico.</span></p><p><span>Caracteristicas:</span></p><ul><li><span>La unidad básica es el </span><em><span>Physical Volume</span></em><span> (PV), que es un dispositivo de bloque en su sistema como una partición de disco o un arreglo RAID.</span></li><li><span>Los PV se agrupan en </span><em><span>Grupos de volúmenes</span></em><span> (VG) que abstraen los  dispositivos subyacentes y se ven como un único dispositivo lógico, con  la capacidad de almacenamiento combinada de los componentes del PV.</span></li><li><span>Los grupos de volúmenes se pueden subdividir en volúmenes lógicos (LV),  que funcionan de forma similar a las particiones pero con más  flexibilidad.</span></li><li><span>Después de crear un volumen lógico, el sistema operativo lo ve como un  dispositivo de bloque normal. Se creará un dispositivo en </span><code>/dev</code><span>, nombrado como </span><code>/dev/VGNAME/LVNAME</code></li></ul><p>&nbsp;</p><h2><a name="gestores-de-arranque" class="md-header-anchor"></a><span>Gestores de arranque</span></h2><p><span>LA BIOS/UEFI  pasan el control al gestor de arranque que será el programa responsable de cargar el sistema operativo.</span></p><ul><li><p><span>LILO: Linux Loader es un cargador que ya esta en desuso</span></p></li><li><p><strong><span>GRUB</span></strong><span> (legacy): el sustituto de LILO, pero también ya casi desaparecido por su sucesor GRUB2</span></p><ul><li><span>Admite BIOS pero no UEFI</span></li><li><span>fichero de configuración </span><code>/boot/grub/menu.lst</code><span>  o </span><code>/boot/grub/grub.cfg</code></li></ul></li></ul><p><strong><span>GRUB</span></strong><span> numera las unidades y las particiones de forma especial.El primer disco será (hd0) y la primera partición (hd0,0), después 1 y así consecutivamente.</span></p><p><span>Opciones del menu de configuración:</span></p><ul><li><span>default: S.O. por defecto que arrancará</span></li><li><span>timeout: segundos que espera la elección del usuario</span></li></ul><p><span>Las entradas de cada Sistema Operativo tienen:</span></p><ul><li><span>title: nombre que aparece en el menú</span></li><li><span>root: Indica con su nomenclatura, la partición que contiene el sistema operativo. Ejemplo: </span><code>root (hd1,2)</code></li><li><span>kernel: Ruta del fichero del kernel y opciones de arranque</span></li><li><span>initrm: Ruta del disco RAM, con opciones y controladores para poder arrancar.</span></li></ul><p><span>Para sistemas operativos que no son Linux:</span></p><ul><li><span>rootverify: Partición del S.O.</span></li><li><span>chainloader: Para pasar el control a otro cargador de arranque. +1 significa que lee el primer sector de la partición indicada por rootrnoverify.</span></li></ul><p>&nbsp;</p><h3><a name="grub2" class="md-header-anchor"></a><span>GRUB2</span></h3><p><span>El actual gestor de arranque en casi todas las distribuciones. Es muy versatil, puede cargar módulos según las necesidades del sistema.</span></p><ul><li><p><span>Hereda la nomenclatura de GRUP, pero las particiones empiezan en 1</span></p></li><li><p><span>Ficheros de configuración: </span><code>/boot/grub/grub.cfg</code><span> , </span><code>/boot/grub2/grub.cfg</code><span> , </span><code>/etc/grub.d</code><span> y</span><code>/etc/default/grub</code><span> </span></p></li><li><p><span>Las entradas de los S.O. empiezan por la palabra reservada </span><strong><span>menuentry</span></strong><span> seguida  del título y el resto de opciones van dentro de llaves</span></p></li><li><p><span>otras diferencias:</span></p><ul><li><span>set root = (hd0,1)</span></li><li><strong><span>rootnoverify</span></strong><span> se sustituye por </span><strong><span>root</span></strong></li></ul></li></ul><p><span>El menú de configuración no  se deve  modificar manualmente. Las opciones se personalizan en </span><code>/etc/default/grub</code></p><ul><li><code>GRUB_DEFAULT=</code><span> define la entrada predeterminada siendo </span><code>0</code><span> la primera</span></li><li><code>GRUB_SAVEDEFAULT=</code><span> si es </span><code>true</code><span> y </span><code>GRUB_DEFAULT</code><span> es </span><code>saved</code><span> , la ultima opción seleccionada será la predeterminada.</span></li><li><code>GRUB_TIMEOUT=</code><span> tiemp de espera, anes del inicio automático, </span><code>-1</code><span> indefinido, </span><code>0</code><span> automatico, </span><code>1 - N</code><span> tiempo de espera.</span></li><li><code>GRUB_CMDLINE_LINUX=</code><span> opciones que se agregan a la  linea de kernel</span></li><li><code>GRUB_ENABLE_CRYPTODISK=</code><span>  si es </span><code>y</code><span> las comandos de instalación y configuración de grub buscarán particiones encriptadas.</span></li></ul><p><span>Si se quiere añadir entradas personalizadas se deben agregar en </span><code>/etc/grub.d/40_custom</code><span>, un ejemplo de entrada básico es el siguiente:</span></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">menuentry <span class="cm-string">"Default OS"</span> {</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-keyword">set</span> <span class="cm-def">root</span><span class="cm-operator">=</span>(hd0,1)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  linux /vmlinuz <span class="cm-def">root</span><span class="cm-operator">=</span>/dev/sda1 ro quiet splash</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp;  initrd /initrd.img</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 114px;"></div><div class="CodeMirror-gutters" style="display: none; height: 114px;"></div></div></div></pre><p><span>En el ejemplo se muestra la ruta a la partición por el nombre, es buena practica utilizar el UUID con </span><code>search --set=root --fs-uuid ae71b214-0aec-48e8-80b2-090b6986b625 --no-floppy</code><span> </span></p><h4><a name="instalación" class="md-header-anchor"></a><span>Instalación</span></h4><p><span>Para crear el </span><code>/boot/grub/grub.cfg</code><span> se ejecuta </span><code>update-grub</code><span> o </span><code>grub-mkconfig -o /boot/grub/grub.cfg</code></p><p><span>Para instalar grub2: </span><code>grub-install</code><span> en el caso de estar en el sistema. Si hemos iniciado con una LiveCD o desde otro sistema.</span></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><span><span>​</span>x</span></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># identificar particiones</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">sudo</span> fdisk <span class="cm-attribute">-l</span> /dev/sda</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># montar la partición donde instalar </span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">sudo</span> <span class="cm-builtin">mkdir</span> /mnt/tmp</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">sudo</span> mount /dev/sda1 /mnt/tmp</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># Si su sistema tiene una partición de arranque dedicada, el comando es:</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">sudo</span> grub-install <span class="cm-attribute">--boot-directory</span><span class="cm-operator">=</span>/mnt/tmp /dev/sda</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># Si está instalando en un sistema que no tiene una partición de arranque</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">sudo</span> grub-install <span class="cm-attribute">--boot-directory</span><span class="cm-operator">=</span>/boot /dev/sda</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 274px;"></div><div class="CodeMirror-gutters" style="display: none; height: 274px;"></div></div></div></pre><p>&nbsp;</p><h4><a name="arranque-consola-grub" class="md-header-anchor"></a><span>arranque consola grub</span></h4><p><span>El arranque desde consola, es practicamente el mismo que en un menuentry</span></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">grub&gt; <span class="cm-builtin">ls</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">(proc) (hd0) (hd0,msdos1)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">grub&gt; <span class="cm-keyword">set</span> <span class="cm-def">root</span><span class="cm-operator">=</span>(hd0,msdos1)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">grub&gt; linux /vmlinuz <span class="cm-def">root</span><span class="cm-operator">=</span>/dev/sda1</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">grub&gt; initrd /initrd.img</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">grub&gt; boot</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># otra opción indicar el archivo de configuración de grub</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">grub&gt; configfile (hd0,msdos1)/boot/grub2/grub.cfg</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 228px;"></div><div class="CodeMirror-gutters" style="display: none; height: 228px;"></div></div></div></pre><p><strong><span>grub rescue</span></strong><span> es muy similar al anterior.  Sin embargo, deberá cargar algunos módulos GRUB 2 para que todo funcione.</span></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">grub rescue&gt; <span class="cm-keyword">set</span> <span class="cm-def">prefix</span><span class="cm-operator">=</span>(hd0,msdos1)/boot/grub</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">grub rescue&gt; insmod normal</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">grub rescue&gt; insmod linux</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">grub rescue&gt; <span class="cm-keyword">set</span> <span class="cm-def">root</span><span class="cm-operator">=</span>(hd0,msdos1)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">grub rescue&gt; linux /vmlinuz <span class="cm-def">root</span><span class="cm-operator">=</span>/dev/sda1</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">grub rescue&gt; initrd /initrd.img</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">grub rescue&gt; boot</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 182px;"></div><div class="CodeMirror-gutters" style="display: none; height: 182px;"></div></div></div></pre><p>&nbsp;</p><p>&nbsp;</p><h3><a name="opciones-del-kernel" class="md-header-anchor"></a><span>Opciones del kernel</span></h3><ul><li><span>quiet: evita que se muestren todos los mensajes al arrancar</span></li><li><span>debug: parecen mensajes de depuración</span></li><li><span>init: indica el programa que se ejecutará al arrancar, en lugar de </span><code>/sbin/init</code><span>. Ejemplo </span><code>init=/bin/bash</code></li><li><span>single: se ejecuta en modo monousuario</span></li><li><span>ro o rw: se monta en solo lectura o en lectura/escritura</span></li><li><span>mem=size: fuerza a usar una cantidad determinada de ROM. Ejemplo </span><code>mem=1024M</code></li></ul><p><span>Existen muchas mas opciones, estas son las mas básicas y utilizadas.</span></p><p>&nbsp;</p><h3><a name="contenido-de-la-partición-de-arranque" class="md-header-anchor"></a><span>Contenido de la partición de arranque</span></h3><p><span>El contenido de la partición </span><code>/boot</code><span> puede variar con la  arquitectura del sistema o el cargador de arranque en uso, pero en un  sistema basado en x86, generalmente encontrará los archivos a  continuación. </span></p><p><strong><span>Archivo de configuración</span></strong><span> Este archivo, generalmente llamado </span><code>config-VERSION</code><span> (vea el  ejemplo anterior), almacena los parámetros de configuración para el  núcleo de Linux.</span></p><p><strong><span>Mapa del sistema</span></strong><span> Este archivo es una tabla de búsqueda que combina nombres de símbolos  (como variables o funciones) con su posición correspondiente en la  memoria. Es útil para depurar un falo de </span><em><span>kernel panic</span></em><span>, permite saber que función se estaba llamando. </span><code>System.map-4.15.0-65-generic</code></p><p><strong><span>kernel linux</span></strong><span> Este es el núcleo del sistema operativo propiamente dicho. </span><code>vmlinux-VERSION</code><span> o </span><code>vmlinuz</code><span> si a sido comprimido</span></p><p><strong><span>Disco RAM inicial</span></strong><span> Esto generalmente se llama </span><code>initrd.img-VERSION</code><span> y contiene un sistema de archivos raíz mínimo, contiene utilidades y módulos del núcleo necesarios para que el núcleo pueda montar el sistema de archivos raíz real.</span></p><p><strong><span>Archivos relacionados con el cargador de arranque</span></strong><span> </span></p><p><span>En los sistemas con GRUB instalado, estos generalmente se encuentran en </span><code>/boot/grub</code><span> e incluyen:</span></p><ul><li><span>archivo de configuración </span><code>/boot/grub/grub.cfg</code><span> o </span><code>menu.lst</code></li><li><span>módulos </span><code>/boot/grub/i386-pc</code><span> </span></li><li><span>archivos de traducción </span><code>/boot/grub/locale</code></li><li><span>fuentes </span><code>/boot/grub/fonts</code></li></ul><p>&nbsp;</p><h2><a name="gestión-de-librerias-compartidas" class="md-header-anchor"></a><span>Gestión de librerias compartidas</span></h2><p><span>Casi todo el software comparte funcionalidades como acceder a disco, mostrar botones, usar formularios, etc.  En lugar de que todos incluyan el código de las mismas operaciones, utilizan ficheros que las ponen a disposición del sistema. Se llaman librerías compartidas. </span></p><p><strong><span>libreria estatica</span></strong><span>  Una biblioteca estática se fusiona con el programa en el momento del  enlace. Una copia del código de la biblioteca se incrusta en el programa y se convierte en parte de él. Por lo tanto, el programa no tiene  dependencias de la biblioteca en tiempo de ejecución porque el programa  ya contiene el código de la biblioteca</span></p><p><strong><span>libreria dinamica</span></strong><span> En el caso de las bibliotecas compartidas, el enlazador simplemente se  encarga de que el programa haga referencia a las bibliotecas  correctamente. Sin embargo, el vinculador no copia ningún código de  biblioteca en el archivo del programa. Sin embargo, en tiempo de ejecución, la biblioteca compartida debe estar  disponible para satisfacer las dependencias del programa.</span></p><p>&nbsp;</p><p><span>El sistema las buscará en: </span></p><ul><li><code>/lib/ , /usr/lib/, /usr/local/lib</code><span>  (o su equivalente en 64bit) </span></li><li><span>Los directorios indicados en </span><code>/etc/ld.so.conf</code></li><li><span>Los directorios guardados en la variable </span><strong><span>LD_LIBRARY_PATH</span></strong><span> ( se suele usar para cambios temporales o librerías muy específicas. Tienen mayor preferencia que el resto)</span></li></ul><p>&nbsp;</p><p><strong><span>/etc/ld.so.conf</span></strong><span> </span></p><p><span>Suele importar con &quot;include&quot; todos los ficheros de </span><code>/etc/ld.so.conf.d/*.conf</code><span>, así se pueden incorporar directorios de forma más modular. </span></p><p><span>Si modificamos alguno de esos ficheros tendremos que ejecutar la orden </span><code>ldconfig</code><span> para que los cambios tengan efecto. Esto genera  una caché de directorios y ficheros compartidos. </span></p><p><span>El comando </span><code>ldd</code><span> nos muestra las librerías que necesita un programa del sistema. </span></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">➜  ~ ldd /usr/lib/firefox-esr/firefox-esr</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>linux-vdso.so.1 (0x00007ffe857fd000)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>libpthread.so.0 <span class="cm-operator">=</span>&gt; /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007f9704de8000)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>libdl.so.2 <span class="cm-operator">=</span>&gt; /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f9704de3000)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>libstdc<span class="cm-operator">++</span>.so.6 <span class="cm-operator">=</span>&gt; /usr/lib/x86_64-linux-gnu/libstdc<span class="cm-operator">++</span>.so.6 (0x00007f9704c5f000)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>libgcc_s.so.1 <span class="cm-operator">=</span>&gt; /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007f9704c45000)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>libc.so.6 <span class="cm-operator">=</span>&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007f9704a84000)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>/lib64/ld-linux-x86-64.so.2 (0x00007f9704edc000)</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>libm.so.6 <span class="cm-operator">=</span>&gt; /lib/x86_64-linux-gnu/libm.so.6 (0x00007f9704901000)</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 205px;"></div><div class="CodeMirror-gutters" style="display: none; height: 205px;"></div></div></div></pre><p>&nbsp;</p><p><span>Los ficheros de las librerías indican la versión y tienen extensión </span><code>.so</code><span> (shared object). Es frecuente que se creen enlaces entre versiones compatibles</span></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">lrwxrwxrwx &nbsp; <span class="cm-number">1</span> root root &nbsp; <span class="cm-number">14</span> ago &nbsp;<span class="cm-number">1</span> &nbsp;<span class="cm-number">2018</span> libogdi.so.3 <span class="cm-attribute">-</span>&gt; libogdi.so.3.2</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-attribute">-rw-r--r--</span> &nbsp; <span class="cm-number">1</span> root root 135K ago &nbsp;<span class="cm-number">1</span> &nbsp;<span class="cm-number">2018</span> libogdi.so.3.2</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 46px;"></div><div class="CodeMirror-gutters" style="display: none; height: 46px;"></div></div></div></pre><p>&nbsp;</p><h2><a name="gestión-de-paquetes" class="md-header-anchor"></a><span>Gestión de paquetes </span></h2><h3><a name="derivados-debian" class="md-header-anchor"></a><span>Derivados debian</span></h3><h4><a name="dpkg" class="md-header-anchor"></a><span>Dpkg</span></h4><p><strong><span>Dpkg</span></strong><span> administra los paquetes de nuestro sistema sin usar reposiorios, es quiere decir que no resuelve dependencias.</span></p><p><span>opciones mas inportantes:</span></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">dpkg <span class="cm-attribute">-i</span> htop_2.2.0-1_amd64.deb<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-comment"># instala un paquete</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">dpkg <span class="cm-attribute">-r</span> htop<span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment"># borra el paquete dejando los ficheros de configuración</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">dpkg <span class="cm-attribute">-P</span> htop<span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment"># borra el paquete incluyendo los ficheros de configuración</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">dpkg <span class="cm-attribute">-s</span> htop<span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment"># muestra información y el estado de un paquete instalado</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">dpkg <span class="cm-attribute">-I</span> htop_2.2.0-1_amd64.deb <span class="cm-comment"># muestra información de un paquete antes de instalarlo</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">dpgk <span class="cm-attribute">-l</span> htop* <span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-comment"># lista todos los paquetes que coincidan con un patron determinado</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">dpkg <span class="cm-attribute">-L</span> htop<span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment"># Muestra todos los ficheros que ha instalado un paquete</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">dpkg <span class="cm-attribute">-S</span> htop*<span class="cm-tab" role="presentation" cm-text="	">   </span><span class="cm-comment"># Muestra los paquetes que contienen ficheros que coincidan con el patron indicado</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 228px;"></div><div class="CodeMirror-gutters" style="display: none; height: 228px;"></div></div></div></pre><p>&nbsp;</p><p><strong><span>Dpkg-reconfigure</span></strong><span> Se utiliza para reconfigurar un paquete instalado en el sistema. Si un paquete se a instalado mal o nos hemos equivocado en algún parametro a introducir, en vez de eliminar el paquete e instalarlo de nuevo, utilizamos por Ejemplo</span><code>dpkg-reconfigure nslcd</code><span> </span></p><p>&nbsp;</p><h4><a name="apt" class="md-header-anchor"></a><span>Apt</span></h4><p><span>Apt es la actualización de </span><code>dpkg</code><span> resolviendo algunas decadencias, como por ejemplo añadir repositorios al instalador y así resolver dependencias automaticamente, o no tener que descargar paquetes manualmente.</span></p><p><span>Los </span><strong><span>repositorios</span></strong><span>  guardan su configuración en </span><code>/etc/apt/sources.list</code><span> y </span><code>/etc/apt/sources.list.d/</code><span>  dentro encontramos direcciones (mirror) de donde descargar paquetes.</span></p><p><span>Opciones:</span></p><ul><li><code>deb</code><span>: dirección de donde descargar paquetes</span></li><li><code>deb-src</code><span>: dirección de donde descargar el código fuente</span></li><li><code>buster</code><span>: versión de la distribución</span></li><li><code>main</code><span>: paqueteria full open source</span></li><li><code>contrib</code><span>: paqueteria open-source con dependencias que pueden no ser open</span></li><li><code>non-free</code><span>: paqueteria no open-source</span></li></ul><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">➜  ~ <span class="cm-builtin">cat</span> /etc/apt/sources.list</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">deb http://ftp.es.debian.org/debian/ buster main contrib non-free</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">deb-src http://ftp.es.debian.org/debian/ buster main contrib non-free</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 68px;"></div><div class="CodeMirror-gutters" style="display: none; height: 68px;"></div></div></div></pre><p><span>Cada vez que se modifica, añade o retira algún repositorio se tiene que actualizar con </span><code>apt-update</code></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">apt update<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment"># actualizar repositorio</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">apt search paquete<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-comment"># buscar paquete en los repositorios</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">apt install paquete</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">apt remove paquete</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">apt purge paquete<span class="cm-tab" role="presentation" cm-text="	">   </span><span class="cm-comment"># elimina los paquetes de configuracioón</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">apt show paquete</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">apt depends paquete</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">apt list paquete<span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment"># lista versiones de un paquete</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 205px;"></div><div class="CodeMirror-gutters" style="display: none; height: 205px;"></div></div></div></pre><p>&nbsp;</p><h4><a name="aptitude" class="md-header-anchor"></a><span>Aptitude</span></h4><p><span>Aptitude es una mejora de </span><code>apt</code><span> , funciona de manera similar, con la ventaja de dar en ocasiones mas información. Ademas si se ejecuta sin ningún parametro </span><code>aptitude</code><span> abre una ventana de texto donde gestionar facilmente los paquetes.</span></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">aptitude search paquete</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>c<span class="cm-tab" role="presentation" cm-text="	">   </span><span class="cm-comment"># existen paquetes de configuración</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>p<span class="cm-tab" role="presentation" cm-text="	">   </span><span class="cm-comment"># no esta instalado</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tab" role="presentation" cm-text="	">    </span>i<span class="cm-tab" role="presentation" cm-text="	">   </span><span class="cm-comment"># instalado</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 91px;"></div><div class="CodeMirror-gutters" style="display: none; height: 91px;"></div></div></div></pre><p>&nbsp;</p><h3><a name="derivados-red-had" class="md-header-anchor"></a><span>Derivados Red Had</span></h3><h4><a name="rpm" class="md-header-anchor"></a><span>RPM </span></h4><p><span>administra la paqueteria de Red Had y deribados como, Centos, Fedora, etc...</span></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">rpm <span class="cm-attribute">-i</span> paquete.rpm &nbsp;<span class="cm-comment"># instala paquete</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">rpm <span class="cm-attribute">-U</span> paquete.rpm &nbsp;<span class="cm-comment"># actualizar paquete y si no esta lo instala</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">rpm <span class="cm-attribute">-F</span> paquete.rpm<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-comment"># actualiza un paquete sólo si esta instalado</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># -vh permiten visualizar vel progreso en las opciones anteriores.</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">rpm <span class="cm-attribute">-ih</span> tftp-server-5.2-18.fc24.x86_64.rpm<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-comment"># indica progreso de la operacion</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">rpm <span class="cm-attribute">-iv</span> tftp-server-5.2-18.fc24.x86_64.rpm<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-comment"># muestra progreso por cada paquete</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">rpm <span class="cm-attribute">-e</span> paquete<span class="cm-tab" role="presentation" cm-text="	">  </span>  <span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-comment"># eliminar paquete</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">rpm <span class="cm-attribute">-V</span> paquete  <span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment"># verifica un paquete, muestra si esta instralado o modificado</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">rpm <span class="cm-attribute">--rebuilddb</span> &nbsp; &nbsp; <span class="cm-comment"># actualizar base de datos rpm</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 251px;"></div><div class="CodeMirror-gutters" style="display: none; height: 251px;"></div></div></div></pre><p><span>consultas sobre paquetes</span></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded md-focus" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap CodeMirror-focused" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 159.6px; left: 474.019px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre>x</pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="" style="position: relative;"><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">rpm <span class="cm-attribute">-qa</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="cm-comment"># todos paquetes instalados</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">rpm <span class="cm-attribute">-ql</span> paquete &nbsp; &nbsp; <span class="cm-comment"># ver contenido del paquete instalado</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">rpm <span class="cm-attribute">-qlp</span> paquete.rpm &nbsp; &nbsp;<span class="cm-comment"># ver contenido de paquete sin instalar</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">rpm <span class="cm-attribute">-qd</span> paquete &nbsp; &nbsp; <span class="cm-comment"># ver paquetes de documentación</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">rpm <span class="cm-attribute">-qc</span> paquete &nbsp; &nbsp; <span class="cm-comment"># ver paquetes de configuración</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">rpm <span class="cm-attribute">-qi</span> paquete &nbsp; &nbsp; <span class="cm-comment"># información del paquete</span></span></pre><div class="" style="position: relative;"><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">rpm <span class="cm-attribute">-qp</span> <span class="cm-attribute">--requires</span> paquete.rpm &nbsp;<span class="cm-comment"># ver dependencias del paquete</span></span></pre></div><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">rpm <span class="cm-attribute">-qpR</span> paquete.rpm<span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment"># ver dependencias del paquete</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">rpm <span class="cm-attribute">-qp</span> <span class="cm-attribute">--scripts</span> paquete.rpm &nbsp; <span class="cm-comment"># ver scripts pre y post intalación</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">rpm <span class="cm-attribute">-qf</span> /usr/bin/useradd &nbsp; &nbsp;<span class="cm-comment"># ver a que paquete pertenece un archivo</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 228px;"></div><div class="CodeMirror-gutters" style="display: none; height: 228px;"></div></div></div></pre><p>&nbsp;</p><p><span>En el caso de querer ver el contenido de un paquete rpm con </span><strong><span>rpm2cpio</span></strong><span> se puede extraer los ficheros para así visualizarlos.</span></p><p><span>rpm2cio transforma un fichero rpm en formato cpio y lo muestra por salida estandar</span></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">rpm2cpio htop-2.2.0-1.fc27.x86_64.rpm &gt; htop.cpio</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 23px;"></div><div class="CodeMirror-gutters" style="display: none; height: 23px;"></div></div></div></pre><p><span>Con el fichero </span><code>.cpio</code><span> podemos extraer el contenido  del paquete.</span></p><p><span>Es recomendable hacerlo en un directorio vacío para que no se mezcle con otro tipo de contenido.</span></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">cpio <span class="cm-attribute">-i</span> <span class="cm-attribute">--make-directories</span> &lt; htop.cpio</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 23px;"></div><div class="CodeMirror-gutters" style="display: none; height: 23px;"></div></div></div></pre><p>&nbsp;</p><h4><a name="yum" class="md-header-anchor"></a><span>Yum</span></h4><p><span>Yum utiliza repositorios que se configuran en ficheros dentro del directorio </span><code>/etc/yum.repos.d/</code><span> </span></p><p><span>Ejemplo de fichero </span><code>CentOS-Base.repo</code></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">[base]</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-def">name</span><span class="cm-operator">=</span>CentOS-<span class="cm-def">$releasever</span> <span class="cm-attribute">-</span> Base</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-def">mirrorlist</span><span class="cm-operator">=</span>http://mirrorlist.centos.org/<span class="cm-def">?release</span><span class="cm-operator">=</span><span class="cm-def">$releasever&amp;arch</span><span class="cm-operator">=</span><span class="cm-def">$basearch&amp;repo</span><span class="cm-operator">=</span>os<span class="cm-def">&amp;infra</span><span class="cm-operator">=</span><span class="cm-def">$infra</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">#baseurl=http://mirror.centos.org/centos/$releasever/os/$basearch/</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-def">gpgcheck</span><span class="cm-operator">=</span><span class="cm-number">1</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-def">gpgkey</span><span class="cm-operator">=</span>file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 160px;"></div><div class="CodeMirror-gutters" style="display: none; height: 160px;"></div></div></div></pre><p><span>Las opciones de yum son muy parecidas a apt algunas de ellas son las siguientes.</span></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash" style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">yum update</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">yum search paquete</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">yum info paquete</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">yum install paquete</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">yum remove paquete</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">yum check-update<span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment"># comprueba actualizaciones de los paquetes que estan instalados</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">yum upgrade paquete<span class="cm-tab" role="presentation" cm-text="	"> </span><span class="cm-comment"># actualiza la versión si esta disponible</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">yum clean<span class="cm-tab" role="presentation" cm-text="	">   </span><span class="cm-comment"># limpia el directorio cache</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">yum makecache <span class="cm-comment"># generar base de datos cache</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">yum list [all|available|updates|installed|obsoletes|recent]</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">yum repolist [enabled|disabled|all]<span class="cm-tab" role="presentation" cm-text="	"> </span><span class="cm-comment"># muestra los repositorios</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">yum-config-manager <span class="cm-attribute">--disabled</span> repo_id &nbsp; <span class="cm-comment"># desabilitar repositorio</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">yum-config-manager <span class="cm-attribute">--enabled</span> repo_id &nbsp; &nbsp;<span class="cm-comment"># habilitar reppositorio</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">yum-config-manager <span class="cm-attribute">--add-repo</span> https://rpms.remirepo.net/enterprise/remi.repo</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 410px;"></div><div class="CodeMirror-gutters" style="display: none; height: 410px;"></div></div></div></pre><p><span>En distribuciones como fedora y suse han actualizado su gestor de paquetes a </span><code>dnf</code><span> en Fedora y </span><code>zipper</code><span> en Suse, las opciones son practicamente las mismas, lo unico que estas actualizaciones son mas optimas y gestionan mejor los recursos.</span></p><p>&nbsp;</p><h4><a name="dnf" class="md-header-anchor"></a><span>dnf</span></h4><p><span>Fedora desarrollo la evolución de YUM para gestionar su paqueteria, la cual es muy similar a YUM en parametros</span></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">dnf search PATTERN<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-comment"># busca coincidencias en repositorios</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">dnf info paquete</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">dnf install paquete</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">dnf remove paquete</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">dnf upgrade paquete</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">dnf provides comand/filename<span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment"># a que paquete pertenece el archivo o comando</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">dnf list <span class="cm-attribute">--installed</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">dnf repoquery <span class="cm-attribute">-l</span> paquete <span class="cm-comment"># ver contenido paquete</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">dnf repolist</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">dnf config-manager <span class="cm-attribute">--add-repo</span> URL</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">dnf config-manager <span class="cm-attribute">--set-enabled</span> REPO_ID</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">dnf config-manager <span class="cm-attribute">--set-disabled</span> REPO_ID</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 296px;"></div><div class="CodeMirror-gutters" style="display: none; height: 296px;"></div></div></div></pre><p>&nbsp;</p><h4><a name="zipper" class="md-header-anchor"></a><span>zipper</span></h4><p><span>Igual que Fedora desarroyo dnf, Suse desarroyo zypper basado en YUM son todos muy similares.</span></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash" style="break-inside: unset;"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">zypper refresh<span class="cm-tab" role="presentation" cm-text="	">  </span><span class="cm-comment"># actualizar</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">zypper search paquete</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">zypper search <span class="cm-attribute">-i</span> paquete <span class="cm-comment"># buscar solo paquetes instalados</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">zypper search <span class="cm-attribute">-u</span> paquete <span class="cm-comment"># buscar solo paquetes no instalados</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">zypper install paquete</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">zypper remove paquete</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">zypper search <span class="cm-attribute">--provides</span> comand/file</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">zypper info paquete</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">zypper repos</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">zypper modifyrepo <span class="cm-attribute">-d</span> alias-repo<span class="cm-tab" role="presentation" cm-text="	"> </span><span class="cm-comment"># desabilitar repositorio</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">zypper modifyrepo <span class="cm-attribute">-e</span> alias-repo <span class="cm-comment"># habilitar repositorio</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">zypper modifyrepo <span class="cm-attribute">-f</span> alias-repo<span class="cm-tab" role="presentation" cm-text="	"> </span><span class="cm-comment"># autorefresh</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">zypper modifyrepo <span class="cm-attribute">-F</span> alias-repo<span class="cm-tab" role="presentation" cm-text="	"> </span><span class="cm-comment"># disable autorefresh</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">zypper addrepo http://packman.inode.at/suse/openSUSE_Leap_15.1/ packman</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">zypper removerepo packman</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 388px;"></div><div class="CodeMirror-gutters" style="display: none; height: 388px;"></div></div></div></pre><p>&nbsp;</p><h2><a name="linux-como-sistema-virtualizado" class="md-header-anchor"></a><span>Linux como sistema virtualizado</span></h2><p><span>La virtualización es una tecnología que permite que una plataforma de software, llamada hipervisor (</span><em><span>hypervisor</span></em><span>), ejecute procesos que contienen un sistema informático completamente  emulado. El hipervisor es responsable de administrar los recursos del  hardware físico que pueden ser utilizados por máquinas virtuales  individuales. Estas máquinas virtuales se denominan </span><em><span>guests</span></em><span> del hipervisor.</span></p><p><span>Los hipervisores de uso común en Linux son:</span></p><p><strong><span>Xen</span></strong><span> es un hipervisor de código abierto de tipo 1, lo que significa que  no depende de un sistema operativo subyacente para funcionar.  Se conoce como un hipervisor de </span><em><span>bare-metal hypervisor</span></em><span>, ya que la computadora puede arrancar directamente en el hipervisor.</span></p><p><strong><span>KVM</span></strong><span> Kernel Virtual Machine es un módulo de kernel de Linux para  virtualización. KVM es un hipervisor tanto del hipervisor Tipo 1 como  del Tipo 2 porque, aunque necesita un sistema operativo Linux genérico para funcionar, puede funcionar perfectamente como hipervisor. KVM utiliza el demonio </span><code>libvirt</code><span> y sus utilidades asociadas.</span></p><p><strong><span>VirtualBox</span></strong><span> Es una aplicación de escritorio popular que facilita la creación y administración de máquinas virtuales. Como VirtualBox requiere de un sistema operativo subyacente para ejecutarse, es un hipervisor de tipo 2.</span></p><p><span>Para utilizar estos hipervisores la CPU del host a de permitir la virtualización.</span></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-def">$ grep</span> <span class="cm-attribute">--color</span> <span class="cm-attribute">-E</span> <span class="cm-string">"vmx|svm"</span> /proc/cpuinfo</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 23px;"></div><div class="CodeMirror-gutters" style="display: none; height: 23px;"></div></div></div></pre><p>&nbsp;</p><p>&nbsp;</p><h3><a name="tipos-de-máquinas-virtuales" class="md-header-anchor"></a><span>Tipos de Máquinas Virtuales</span></h3><p><span>Hay tres tipos principales de máquinas virtuales: el </span><em><span>fully virtualized</span></em><span> guest (un invitado totalmente virtualizado), el </span><em><span>paravirtualized</span></em><span> guest (un invitado paravirtualizado) y el </span><em><span>hybrid</span></em><span> guest (un invitado híbrido).</span></p><p>&nbsp;</p><p><strong><span>Totalmente virtualizado (Fully Virtualized)</span></strong></p><p><span>Todas las instrucciones que se espera que ejecute un sistema  operativo invitado deben poder ejecutarse dentro de una instalación de  sistema operativo totalmente virtualizada. Este sistema operativo no sabe que esta virtualizado y es completamente independiente al host.</span></p><p><span>Para que este tipo de virtualización tenga lugar en hardware basado en  x86, las extensiones de CPU Intel VT-x o AMD-V deben estar habilitadas</span></p><p><strong><span>Paravirtualizado (Paravirtualized)</span></strong></p><p><span>Un invitado paravirtualizado (o PVM) es aquel en el que el sistema  operativo invitado es consciente de que es una instancia de máquina  virtual en ejecución. Este invitado utilizará un kernel modificado y controladores especiales para utilizar recursos de software y hardware del hipervisor.</span></p><p><strong><span>Híbrido (Hybrid)</span></strong></p><p><span>La paravirtualización y la virtualización completa se pueden combinar para permitir que los sistemas operativos no modificados reciban un  rendimiento de E/S casi nativo mediante el uso de controladores  paravirtualizados en sistemas operativos completamente virtualizados.</span></p><p>&nbsp;</p><h3><a name="principales-tipos-de-disco" class="md-header-anchor"></a><span>Principales tipos de disco</span></h3><p><strong><span>COW</span></strong><span>  Copy-on-write (también conocido como </span><em><span>thin-provisioning</span></em><span> o </span><em><span>sparse images</span></em><span>)  El tamaño de la imagen del disco solo aumenta a medida que se escriben nuevos datos en el disco. El formato de vla imagen de disco es </span><code>qcow2</code><span>.</span></p><p><strong><span>RAW</span></strong><span>  Un tipo de disco </span><em><span>raw</span></em><span> o </span><em><span>full</span></em><span> es un archivo que tiene  todo su espacio preasignado. Por ejemplo, un archivo de imagen de disco  sin formato de 10 GB consume 10 GB de espacio real en el hipervisor. </span></p><p>&nbsp;</p><p><span>Si dos máquinas virtules se clonan tendrán el mismo identificador de D-Bus, esto puede causar irregularidades en el funcionamiento. Para generar un nuevo identificador:</span></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.59375px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-def">$ dbus</span><span class="cm-attribute">-uuidgen</span> <span class="cm-attribute">--get</span><span class="cm-tab" role="presentation" cm-text="	">    </span><span class="cm-comment"># ver identificador</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">17f2e0698e844e31b12ccd3f9aa4d94a</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment"># generar uno nuevo</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-def">$ sudo</span> <span class="cm-builtin">rm</span> <span class="cm-attribute">-f</span> /etc/machine-id</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-def">$ sudo</span> dbus-uuidgen <span class="cm-attribute">--ensure</span><span class="cm-operator">=</span>/etc/machine-id</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 114px;"></div><div class="CodeMirror-gutters" style="display: none; height: 114px;"></div></div></div></pre><p>&nbsp;</p><h3><a name="contenedores" class="md-header-anchor"></a><span>Contenedores</span></h3><p><span>La tecnología de contenedores es similar en algunos aspectos a una  máquina virtual, donde se obtiene un entorno aislado para implementar  fácilmente una aplicación. Mientras que con una máquina virtual se emula una computadora completa, un contenedor utiliza el software suficiente  para ejecutar una aplicación. De esta manera, hay mucho menos gastos  generales.</span></p><p><span>Existen numerosas tecnologías de contenedor disponibles para Linux, como </span><em><span>Docker</span></em><span>, </span><em><span>Kubernetes</span></em><span>, </span><em><span>LXD/LXC</span></em><span>, </span><em><span>systemd-nspawn</span></em><span>, </span><em><span>OpenShift</span></em><span> y más.</span></p><p>&nbsp;</p><p>&nbsp;</p></div>
+</body>
+</html>

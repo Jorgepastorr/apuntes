@@ -1,0 +1,18 @@
+$TTL    86400 
+pas.net.   IN  SOA      alfa.pas.net. root.pas.net. ( 
+        4 
+        604800 
+        86400 
+        2419200 
+        86400 ) 
+
+pas.net.   IN   NS      alfa.pas.net.
+pas.net.        IN      NS      beta.pas.net.
+alfa.pas.net.			IN    A	192.168.200.101
+beta.pas.net.	IN   A		192.168.200.102 
+servidor-a  IN   CNAME	alfa.pas.net. 
+alfa		IN   CNAME	alfa
+cliente     IN      A       192.168.200.212
+publico		IN   CNAME	beta
+privado		IN   CNAME	beta
+pas.net.	IN	MX 10	alfa.pas.net.

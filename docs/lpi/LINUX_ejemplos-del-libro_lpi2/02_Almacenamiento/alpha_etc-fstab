@@ -1,0 +1,18 @@
+# /etc/fstab: static file system information.
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+proc            /proc           proc    defaults        0       0
+# / was on /dev/sda1 during installation
+UUID=2657c2ef-f108-4426-97ba-539445475510       /               ext3    errors=remount-ro 0       1
+# swap was on /dev/sda5 during installation
+UUID=ae024780-264a-4671-952e-f40a925c4afc       none            swap    sw              0       0
+/dev/scd0        /media/cdrom0   udf,iso9660 user,noauto     0       0
+
+# Añade un nuevo espacio de  swap
+
+/swap		none		swap	sw		0	0
+
+# Montaje del volumen de documentación
+
+/dev/volgrp/documentation  /documentation  ext3  ro  0  0
+
