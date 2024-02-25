@@ -763,3 +763,98 @@ random.sample(l, 2) # muestra aleatoria de 2 elementos de la lista
 [3, 4]
 ```
 
+
+## regex
+
+Las funciones de este módulo permiten comprobar si una determinada cadena coincide con una expresión regular dada.
+
+El uso de las expresiones regulares en Python viene dado por el paquete re, que hay que importar a nuestro código. 
+
+    import re
+
+
+### re.match
+
+**re.match()** Si hay cero o más caracteres al comienzo de la cadena que coincide con el patrón de expresión regular
+
+    texto = "Programa en Python"
+    buscar = re.match("Programa", texto) 
+    print(buscar)
+    <re.Match object; span=(0, 8), match='Programa'>
+
+    buscar.string
+    'Programa en Python'
+
+    buscar.group()
+    'Programa'
+
+    buscar.span()
+    (0, 8)
+
+    buscar.start()
+    0
+
+    buscar.end()
+    8
+
+### re.search
+
+**re.search(patrón, cadena):** busca la primera ocurrencia de la expresión regular definida en patrón dentro del string cadena. 
+
+    encontro = re.search("Python", "Programa en Python Python")
+    encontro
+
+    <re.Match object; span=(12, 18), match='Python'>
+
+### re.findall
+
+**re.findall(patrón, cadena):** devuelve una lista que contiene todas las ocurrencias de la expresión regular definida en patrón dentro del string cadena. 
+
+    import re
+
+    re.findall("Python", "En este curso de Python, aprenderemos a programar en Python y nos convertiremos en Pythonista.")
+
+    ['Python', 'Python', 'Python']
+
+> Si quieres utilizar una variable como ptrón tentras que  compilasrla primero
+
+    patron = re.compile('^Python') 
+    frase = "Python es un lenguaje de programación. Python"
+    re.findall(patron, frase)
+
+    ['Python']
+
+### re.finditer
+
+**finditer():** El cual es similar a re.findall, pero en lugar de devolvernos una lista nos devuelve un iterador.
+
+    encontrados = re.finditer("Python", "En este curso de Python, aprenderemos a programar en Python y nos convertiremos en Pythonista.")
+
+    for encontro in encontrados:
+        print(encontro)
+
+    <re.Match object; span=(17, 23), match='Python'>
+    <re.Match object; span=(53, 59), match='Python'>
+    <re.Match object; span=(83, 89), match='Python'>
+
+### re.sub
+
+**re.sub(patrón, repl, string):** reemplaza las coincidencias con el texto de su elección (repl).
+
+    import re
+
+    txt = "Se esperan abundantes lluvias"
+    x = re.sub("\s", "-", txt) # "\s espacio en blanco en RE
+    print(x)
+
+    Se-nuevo-abundantes-lluvias
+    
+### re.split
+
+**re.split(separador, cadena):** divide la cadena tomando en cuenta las ocurrencias del separador. El resultado se devuelve en una lista.
+
+    txt = "Se esperan abundantes lluvias"
+    x = re.split("\s", txt, 2) #\s espacio en blanco en RE 2 aplica el split 2 veces
+    print(x)
+
+    ['Se', 'esperan', 'abundantes lluvias']
